@@ -1,0 +1,9 @@
+
+Eventos:
+1: Qual o critério para agregar os erros e incrementar o número de eventos:
+2: Como implementar a agregação (método java que faz uma query na base, sql view,
+    procedure na base que incrementa uma tabela com os eventos).
+
+Level:
+1: O mesmo error pode ser reportado em mais de um level?
+

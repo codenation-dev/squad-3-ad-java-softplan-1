@@ -1,0 +1,50 @@
+##Endpoints##
+
+[Gestão de Acesso]
+/newUser
+/login
+/passwordReset
+/logout
+
+[Inserção de Logs]
+/newError POST
+
+
+
+[Tela de Log Errors]
+/ShowErrors
+
+/ArchiveError
+/DeleteError
+
+[Filtros]
+/getError(errorID)
+
+
+##Data Scheme##
+
+*Error*
+string(255) - titulo
+text - detalhes
+string - origem
+date - data
+int -user FK
+int - level FK
+int - environment FK
+
+
+Premissas:
+- que o error tem apenas um tipo de level
+
+*Frequencia (View?)*
+int - error_id FK
+
+*ErrorType*
+int - id
+string - name
+
+*User*
+int - id
+string - nome
+string - email
+string - senha
