@@ -1,6 +1,8 @@
-package com.br.aceleradev.javasquad3.entitys;
+package br.com.aceleradev.javasquad3.errorlogger.controller;
 
 import java.util.Date;
+
+//CLASSE INICIAL DE DOCUMENTAÇÃO, SERÁ CONSTRUÍDA CORRETAMENTE DEPOIS.
 
 public class API {
 
@@ -11,7 +13,7 @@ public class API {
     private void deleteError(int idError){};
     private void archievError(int idError){};
 
-    private String[] listErrors() {};
+    private String[] listErrors() { return new String[5];};
     private String getError(){return "error";};
 
 

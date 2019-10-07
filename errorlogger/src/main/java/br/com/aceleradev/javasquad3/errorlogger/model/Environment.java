@@ -1,4 +1,4 @@
-package com.br.aceleradev.javasquad3.entitys;
+package br.com.aceleradev.javasquad3.errorlogger.model;
 
 public class Environment {
     int id;
