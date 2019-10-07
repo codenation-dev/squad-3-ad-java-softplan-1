@@ -1,25 +1,36 @@
 package br.com.aceleradev.javasquad3.errorlogger.model;
 
+import org.springframework.data.annotation.Id;
+
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import java.util.Date;
 
 
-//Projeto final;
 public class Error {
-    private int id;
-    private Date date;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column
+    private Long id;
+    @Column
+    private Date createad;
+    @Column
     private String origin;
+    @Column
     private String title;
+    @Column
     private String description;
-    private int userID;
-    private int levelID;
-    private String environment;
-    private Date archivedDate;
-    private Date deletionDate;
-
-
-
-
-//Método para agregar errros sobre alguma forma para gerar o número "EVENTOS";
+    @Column(name = "user_id")
+    //TODO: Add association to another class.
+    private Long userID;
+    @Column(name = "level_id")
+    //TODO: Add association to another class.
+    private Long levelID;
+    @Column(name = "environment_id")
+    private Long environmentID;
+    @Column
+    private Date archived;
 
 
 }
