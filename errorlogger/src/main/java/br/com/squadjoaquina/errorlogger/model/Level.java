@@ -7,18 +7,16 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
+@Getter
+@Setter
 @Entity
 public class Level {
 
-    @Getter
-    @Setter
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Getter
-    @Setter
+
     private String name;
 
     public Level() {

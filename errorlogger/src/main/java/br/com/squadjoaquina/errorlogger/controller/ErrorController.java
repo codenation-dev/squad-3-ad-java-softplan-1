@@ -1,7 +1,10 @@
 package br.com.squadjoaquina.errorlogger.controller;
 
+import br.com.squadjoaquina.errorlogger.model.User;
 import br.com.squadjoaquina.errorlogger.service.ErrorService;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController()
