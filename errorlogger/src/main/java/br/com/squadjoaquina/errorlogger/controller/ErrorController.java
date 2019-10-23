@@ -15,22 +15,22 @@ public class ErrorController {
         this.errorService = errorService;
     }
 
-    @RequestMapping("/record")
-    public void recordError(){
+    @RequestMapping("/save")
+    public void save(){
         //String title, String details, String origin, Date date, int user, String level, String environment
     }
 
     @RequestMapping("/search")
-    public void searchErrors(){}
+    public void search(){}
 
     //Talvez deleteMapping? Os verbos HTTP ainda tem que ser decididos.
     @RequestMapping("/delete")
-    public void deleteError() {
+    public void delete() {
         //idError
     }
 
     @RequestMapping("/stash")
-    public void stashError() {
+    public void stash() {
         //idError
         //É o arquivar.
     }
