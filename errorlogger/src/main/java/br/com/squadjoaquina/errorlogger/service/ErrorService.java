@@ -14,6 +14,8 @@ public class ErrorService {
         this.errorRepository = errorRepository;
     }
 
-    //TODO: ADD METHODS FOR HANDLING ERRORS.
+    public void delete(Long id) {
+        errorRepository.deleteById(id);
+    }
 
 }
