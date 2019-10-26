@@ -35,7 +35,6 @@ public class Error {
 
     private Environment environment;
 
-
     private Timestamp archived;
 
     @CreatedDate
