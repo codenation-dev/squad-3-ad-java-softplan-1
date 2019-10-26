@@ -8,7 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
 
 @Getter
@@ -21,10 +20,10 @@ public class Error {
     @Id
     private Long id;
 
-    @NotNull
+    @NotEmpty
     private String origin;
 
-    @NotNull
+    @NotEmpty
     private String title;
 
     private String description;
@@ -32,11 +31,9 @@ public class Error {
     //TODO: Add association to another class.
     private Long userID;
 
-    //TODO: Add association to another class.
-    private Long levelID;
+    private Level level;
 
-    //TODO: Add association to another class.
-    private Long environmentID;
+    private Environment environment;
 
 
     private Timestamp archived;

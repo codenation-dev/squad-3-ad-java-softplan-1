@@ -1,10 +1,7 @@
 package br.com.squadjoaquina.errorlogger.controller;
 
-import br.com.squadjoaquina.errorlogger.model.User;
 import br.com.squadjoaquina.errorlogger.service.ErrorService;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController()
@@ -18,8 +15,21 @@ public class ErrorController {
         this.errorService = errorService;
     }
 
-    @RequestMapping("/save")
-    public void save(){
+    /**
+     * @author Pacifique
+     * @param error
+     * @param result
+     * @return Um String informando se o cadastro foi feito ou não
+     */
+    @PostMapping("/save")
+    public String save(Error error, BindingResult result){
+        if(result.hasErros()){
+            return "Não foi possível adicionar este erro! Confere os dados!";
+        }
+        else{
+            errorService.saveError(error);
+            return "Erro adicionado com sucesso!";
+        }
         //String title, String details, String origin, Date date, int user, String level, String environment
     }
 
