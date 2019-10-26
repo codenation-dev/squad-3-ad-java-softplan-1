@@ -19,7 +19,7 @@ public class ErrorController {
      * @author Pacifique.
      * @param error
      * @param result
-     * @return Um String informando se o cadastro foi feito ou não
+     * @return Um String informando se o cadastro foi feito ou não.
      */
     @PostMapping("/save")
     public String save(Error error, BindingResult result){

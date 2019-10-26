@@ -15,7 +15,6 @@ import java.sql.Timestamp;
 @Entity
 public class Error {
 
-
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
     private Long id;

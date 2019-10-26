@@ -15,7 +15,6 @@ public class ErrorService {
     }
 
     //TODO: ADD METHODS FOR HANDLING ERRORS.
-
     public void saveError(Error error){
         errorRepository.save(error);
     }
