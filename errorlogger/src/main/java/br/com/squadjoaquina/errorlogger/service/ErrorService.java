@@ -1,5 +1,7 @@
 package br.com.squadjoaquina.errorlogger.service;
 
+import br.com.squadjoaquina.errorlogger.dto.ErrorDTO;
+import br.com.squadjoaquina.errorlogger.mapper.ErrorMapper;
 import br.com.squadjoaquina.errorlogger.repository.ErrorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,9 +16,8 @@ public class ErrorService {
         this.errorRepository = errorRepository;
     }
 
-    //TODO: ADD METHODS FOR HANDLING ERRORS.
-    public void saveError(Error error){
-        errorRepository.save(error);
+    public void saveError(ErrorDTO errorDTO){
+        errorRepository.save(ErrorMapper.toError(errorDTO));
     }
 
 }

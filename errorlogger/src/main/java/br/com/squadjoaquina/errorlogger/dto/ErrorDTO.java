@@ -1,23 +1,17 @@
-package br.com.squadjoaquina.errorlogger.model;
+package br.com.squadjoaquina.errorlogger.dto;
 
+import br.com.squadjoaquina.errorlogger.model.Environment;
+import br.com.squadjoaquina.errorlogger.model.Level;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.data.annotation.CreatedDate;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.sql.Timestamp;
 
-@Entity @Setter @Getter @NoArgsConstructor
-public class Error {
-
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+@Getter @Setter @NoArgsConstructor
+public class ErrorDTO {
 
     @NotNull @Size(min = 1)
     private String origin;
@@ -40,6 +34,5 @@ public class Error {
 
     private Timestamp archivedDate;
 
-    @CreatedDate
     private Timestamp createAt;
 }
