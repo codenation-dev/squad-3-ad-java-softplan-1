@@ -1,26 +1,32 @@
 package br.com.squadjoaquina.errorlogger.controller;
 
-import br.com.squadjoaquina.errorlogger.model.User;
+import br.com.squadjoaquina.errorlogger.dto.ErrorDTO;
+import br.com.squadjoaquina.errorlogger.model.Error;
 import br.com.squadjoaquina.errorlogger.service.ErrorService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController()
-@RequestMapping("/error")
-public class ErrorController {
+import javax.validation.Valid;
 
+@RestController
+@RequestMapping("v1/error")
+public class ErrorController {
 
     public final ErrorService errorService;
 
+    @Autowired
     public ErrorController(ErrorService errorService) {
         this.errorService = errorService;
     }
 
-    @RequestMapping("/save")
-    public void save(){
-        //String title, String details, String origin, Date date, int user, String level, String environment
+    @PostMapping("/save")
+    public ResponseEntity<?> saveError(@Valid @RequestBody ErrorDTO error){
+        errorService.saveError(error);
+        return ResponseEntity.ok().build();
     }
 
     @RequestMapping("/search")
