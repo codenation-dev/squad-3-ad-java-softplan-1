@@ -12,6 +12,7 @@ public class ErrorMapper {
     public static Error toError (ErrorDTO errorDTO){
         Error error = new Error();
 
+        error.setId(errorDTO.getId());
         error.setArchived(errorDTO.isArchived());
         error.setCreatedAt(errorDTO.getCreatedAt());
         error.setDescription(errorDTO.getDescription());
@@ -22,5 +23,21 @@ public class ErrorMapper {
         error.setUserID(errorDTO.getUserID());
         error.setArchivedAt(errorDTO.getArchivedAt());
         return error;
+    }
+
+    public static ErrorDTO toDTO (Error error){
+        ErrorDTO errorDTO = new ErrorDTO();
+
+        errorDTO.setId(error.getId());
+        errorDTO.setArchived(error.isArchived());
+        errorDTO.setCreatedAt(error.getCreatedAt());
+        errorDTO.setDescription(error.getDescription());
+        errorDTO.setEnvironment(error.getEnvironment());
+        errorDTO.setLevel(error.getLevel());
+        errorDTO.setOrigin(error.getOrigin());
+        errorDTO.setTitle(error.getTitle());
+        errorDTO.setUserID(error.getUserID());
+        errorDTO.setArchivedAt(error.getArchivedAt());
+        return errorDTO;
     }
 }

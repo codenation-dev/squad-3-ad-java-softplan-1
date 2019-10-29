@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.sql.Timestamp;
@@ -13,10 +14,12 @@ import java.sql.Timestamp;
 @Getter @Setter @NoArgsConstructor
 public class ErrorDTO {
 
-    @NotNull @Size(min = 1)
+    private Long id;
+
+    @NotBlank
     private String origin;
 
-    @NotNull @Size(min = 1)
+    @NotBlank
     private String title;
 
     private String description;
