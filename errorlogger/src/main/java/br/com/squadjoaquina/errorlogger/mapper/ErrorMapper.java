@@ -13,14 +13,14 @@ public class ErrorMapper {
         Error error = new Error();
 
         error.setArchived(errorDTO.isArchived());
-        error.setCreateAt(errorDTO.getCreateAt());
+        error.setCreatedAt(errorDTO.getCreatedAt());
         error.setDescription(errorDTO.getDescription());
         error.setEnvironment(errorDTO.getEnvironment());
         error.setLevel(errorDTO.getLevel());
         error.setOrigin(errorDTO.getOrigin());
         error.setTitle(errorDTO.getTitle());
         error.setUserID(errorDTO.getUserID());
-        error.setArchivedDate(errorDTO.getArchivedDate());
+        error.setArchivedAt(errorDTO.getArchivedAt());
         return error;
     }
 }
