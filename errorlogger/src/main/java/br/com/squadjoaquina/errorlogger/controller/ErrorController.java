@@ -1,8 +1,10 @@
 package br.com.squadjoaquina.errorlogger.controller;
 
 import br.com.squadjoaquina.errorlogger.dto.ErrorDTO;
+import br.com.squadjoaquina.errorlogger.model.Error;
 import br.com.squadjoaquina.errorlogger.service.ErrorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,6 +19,11 @@ public class ErrorController {
     @Autowired
     public ErrorController(ErrorService errorService) {
         this.errorService = errorService;
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ErrorDTO> getById(@PathVariable("id") Long id) {
+        return new ResponseEntity<>(errorService.getById(id), HttpStatus.OK);
     }
 
     @PostMapping("/save")
