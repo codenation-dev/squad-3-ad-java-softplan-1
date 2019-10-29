@@ -1,6 +1,7 @@
 package br.com.squadjoaquina.errorlogger.controller;
 
 import br.com.squadjoaquina.errorlogger.service.ErrorService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,13 +28,11 @@ public class ErrorController {
     public void search() {
     }
 
-    //TODO: Adicionar tratamento de exceção para quando o id recebido não
-    // corresponder a nenhum erro na base.
     @DeleteMapping("/delete/{id}")
-    public void delete(@PathVariable Long id) {
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
         errorService.delete(id);
+        return ResponseEntity.noContent().build();
     }
-
 
     @RequestMapping("/stash")
     public void stash() {

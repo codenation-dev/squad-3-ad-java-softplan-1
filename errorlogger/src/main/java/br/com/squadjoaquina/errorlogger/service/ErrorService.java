@@ -1,7 +1,9 @@
 package br.com.squadjoaquina.errorlogger.service;
 
 import br.com.squadjoaquina.errorlogger.repository.ErrorRepository;
+import br.com.squadjoaquina.errorlogger.service.exception.ErrorNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -15,7 +17,11 @@ public class ErrorService {
     }
 
     public void delete(Long id) {
-        errorRepository.deleteById(id);
+        try {
+            errorRepository.deleteById(id);
+        } catch (EmptyResultDataAccessException e) {
+            throw new ErrorNotFoundException();
+        }
     }
 
 }
