@@ -30,8 +30,10 @@ public class ErrorService {
         }
     }
 
-    public void saveError(ErrorDTO errorDTO) {
+    public String saveError(ErrorDTO errorDTO){
+        errorDTO.setCreateAt(new Timestamp(System.currentTimeMillis()));
         errorRepository.save(ErrorMapper.toError(errorDTO));
+        return "Erro salvo com sucesso!";
     }
 
     public void delete(Long id) {
