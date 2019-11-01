@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
 import java.util.Optional;
 
 @Service
@@ -30,8 +31,8 @@ public class ErrorService {
         }
     }
 
-    public String saveError(ErrorDTO errorDTO){
-        errorDTO.setCreateAt(new Timestamp(System.currentTimeMillis()));
+    public String save(ErrorDTO errorDTO){
+        errorDTO.setCreatedAt(new Timestamp(System.currentTimeMillis()));
         errorRepository.save(ErrorMapper.toError(errorDTO));
         return "Erro salvo com sucesso!";
     }
@@ -44,4 +45,19 @@ public class ErrorService {
         }
     }
 
+    public String stach(Long id) {
+//        if (getById(id).equals(new ErrorNotFoundException())) {
+//            return "O erro escolhido não existe no sistema!";
+//        } else {
+            ErrorDTO error = getById(id);
+            if (error.isArchived()) {
+                return "O erro escolhido já está arquivado!";
+            } else {
+                error.setArchived(true);
+                error.setArchivedAt(new Timestamp(System.currentTimeMillis()));
+                errorRepository.save(ErrorMapper.toError(error));
+                return "Erro arquivado com sucesso!";
+            }
+        }
+    //}
 }
