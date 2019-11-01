@@ -1,13 +1,14 @@
 package br.com.squadjoaquina.errorlogger.controller;
 
 import br.com.squadjoaquina.errorlogger.dto.ErrorDTO;
-import br.com.squadjoaquina.errorlogger.model.Error;
+import br.com.squadjoaquina.errorlogger.model.Environment;
 import br.com.squadjoaquina.errorlogger.service.ErrorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.Enumerated;
 import javax.validation.Valid;
 
 @RestController
@@ -32,8 +33,11 @@ public class ErrorController {
         return ResponseEntity.ok().build();
     }
 
-    @RequestMapping("/search")
-    public void search() {
+    @GetMapping("/search")
+    public void search(@RequestParam("search_term") String searchTerm,
+                       @RequestParam("search_criteria") String searchCriteria,
+                       @RequestParam("order_by") String orderBy,
+                       @RequestParam(name ="environment")  Environment environment) {
     }
 
     @DeleteMapping("/delete/{id}")
@@ -42,7 +46,7 @@ public class ErrorController {
         return ResponseEntity.noContent().build();
     }
 
-    @RequestMapping("/stash")
+    @PutMapping("/stash")
     public void stash() {
         //idError
         //É o arquivar.
