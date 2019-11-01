@@ -5,6 +5,7 @@ import br.com.squadjoaquina.errorlogger.model.Level;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.annotation.CreatedDate;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -34,5 +35,6 @@ public class ErrorDTO {
 
     private Timestamp archivedDate;
 
+    @CreatedDate
     private Timestamp createAt;
 }

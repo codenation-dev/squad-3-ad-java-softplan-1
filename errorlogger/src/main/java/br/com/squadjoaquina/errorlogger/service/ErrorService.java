@@ -18,20 +18,9 @@ public class ErrorService {
         this.errorRepository = errorRepository;
     }
 
-    public void saveError(ErrorDTO errorDTO){
+    public String saveError(ErrorDTO errorDTO){
         errorDTO.setCreateAt(new Timestamp(System.currentTimeMillis()));
         errorRepository.save(ErrorMapper.toError(errorDTO));
-    }
-
-    public ErrorDTO findError(Long id){
-        return ErrorMapper.toErrorDTO(errorRepository.findErrorById(id));
-    }
-
-    public void stashError(Long id) {
-        ErrorDTO error = findError(id);
-        error.setArchived(true);
-        error.setArchivedDate(new Timestamp(System.currentTimeMillis()));
-
-        errorRepository.save(ErrorMapper.toError(error));
+        return "Erro salvo com sucesso!";
     }
 }
