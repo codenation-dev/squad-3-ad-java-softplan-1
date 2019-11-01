@@ -8,7 +8,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.Enumerated;
 import javax.validation.Valid;
 
 @RestController
@@ -28,16 +27,15 @@ public class ErrorController {
     }
 
     @PostMapping("/save")
-    public ResponseEntity<?> saveError(@Valid @RequestBody ErrorDTO error) {
-        errorService.saveError(error);
-        return ResponseEntity.ok().build();
+    public ResponseEntity<String> save(@Valid @RequestBody ErrorDTO error) {
+        return new ResponseEntity<>(errorService.save(error), HttpStatus.OK);
     }
 
     @GetMapping("/search")
     public void search(@RequestParam("search_term") String searchTerm,
                        @RequestParam("search_criteria") String searchCriteria,
                        @RequestParam("order_by") String orderBy,
-                       @RequestParam(name ="environment")  Environment environment) {
+                       @RequestParam(name = "environment") Environment environment) {
     }
 
     @DeleteMapping("/delete/{id}")
@@ -46,9 +44,8 @@ public class ErrorController {
         return ResponseEntity.noContent().build();
     }
 
-    @PutMapping("/stash")
-    public void stash() {
-        //idError
-        //É o arquivar.
+    @RequestMapping("/stash/{id}")
+    public ResponseEntity<String> stash(@PathVariable Long id) {
+        return new ResponseEntity<>(errorService.stach(id), HttpStatus.OK);
     }
 }
