@@ -3,27 +3,27 @@ package br.com.squadjoaquina.errorlogger.service;
 import br.com.squadjoaquina.errorlogger.controller.paramenum.Criteria;
 import br.com.squadjoaquina.errorlogger.model.Environment;
 import br.com.squadjoaquina.errorlogger.model.Level;
-import br.com.squadjoaquina.errorlogger.model.SummaryAggregateErrors;
-import br.com.squadjoaquina.errorlogger.repository.SummaryAggregateErrorsRepository;
+import br.com.squadjoaquina.errorlogger.model.ErrorAggregate;
+import br.com.squadjoaquina.errorlogger.repository.ErrorAggregateRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class SummaryAggregateErrorsService {
+public class ErrorAggregateService {
 
-    private final SummaryAggregateErrorsRepository repository;
+    private final ErrorAggregateRepository repository;
 
     @Autowired
-    public SummaryAggregateErrorsService(
-            SummaryAggregateErrorsRepository repository) {
+    public ErrorAggregateService(
+            ErrorAggregateRepository repository) {
         this.repository = repository;
     }
 
     //Isso aqui ainda não está 100%, seria melhor implementar com predicates.
-    public List<SummaryAggregateErrors> search(Environment environment,
-                                               Criteria criteria, String term) {
+    public List<ErrorAggregate> search(Environment environment,
+                                       Criteria criteria, String term) {
 
         switch (criteria) {
             case DESCRIPTION:

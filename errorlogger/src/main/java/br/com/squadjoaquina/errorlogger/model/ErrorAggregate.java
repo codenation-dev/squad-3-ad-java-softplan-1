@@ -30,7 +30,7 @@ import java.util.Date;
            "    e.level, " +
            "    e.origin, " +
            "    e.title")
-public class SummaryAggregateErrors {
+public class ErrorAggregate {
 
     @Enumerated(EnumType.STRING)
     private Level level;
