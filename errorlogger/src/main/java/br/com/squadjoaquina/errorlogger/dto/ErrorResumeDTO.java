@@ -2,6 +2,7 @@ package br.com.squadjoaquina.errorlogger.dto;
 
 import br.com.squadjoaquina.errorlogger.model.Environment;
 import br.com.squadjoaquina.errorlogger.model.Level;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -9,25 +10,20 @@ import lombok.Setter;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.sql.Timestamp;
+import java.util.Date;
 
-@Getter @Setter @NoArgsConstructor
+@Getter @Setter @AllArgsConstructor
 public class ErrorResumeDTO {
 
-    @NotNull
-    @Size(min = 1)
-    private String origin;
-
-    private String description;
-
-    @NotNull
     private Level level;
 
-    @NotNull
-    private Environment environment;
+    private String origin;
 
-    private boolean archived = false;
+    private String title;
 
-    private Timestamp archivedDate;
+    private Long lastErrorId;
 
-    private Timestamp createAt;
+    private Date lastErrorDate;
+
+    private Long Events;
 }
