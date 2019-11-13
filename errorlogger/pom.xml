@@ -57,6 +57,20 @@
 			<artifactId>spring-restdocs-mockmvc</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/net.kaczmarzyk/specification-arg-resolver -->
+		<dependency>
+			<groupId>net.kaczmarzyk</groupId>
+			<artifactId>specification-arg-resolver</artifactId>
+			<version>2.1.1</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>2.8.5</version>
+		</dependency>
+
+
 	</dependencies>
 
 	<build>
