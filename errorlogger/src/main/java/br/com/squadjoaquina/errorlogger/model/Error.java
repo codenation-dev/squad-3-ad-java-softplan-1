@@ -11,17 +11,23 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.sql.Timestamp;
 
-@Entity @Setter @Getter @NoArgsConstructor
+@Entity
+@Setter
+@Getter
+@NoArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
 public class Error {
 
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @NotNull @Size(min = 1)
+    @NotNull
+    @Size(min = 1)
     private String origin;
 
-    @NotNull @Size(min = 1)
+    @NotNull
+    @Size(min = 1)
     private String title;
 
     private String description;
@@ -30,15 +36,18 @@ public class Error {
     private Long userID;
 
     @NotNull
+    @Enumerated(EnumType.STRING)
     private Level level;
 
     @NotNull
+    @Enumerated(EnumType.STRING)
     private Environment environment;
 
     private boolean archived = false;
 
     private Timestamp archivedAt;
 
+    @Column(updatable = false)
     @CreatedDate
     private Timestamp createdAt;
 }
