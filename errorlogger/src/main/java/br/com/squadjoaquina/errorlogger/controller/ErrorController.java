@@ -1,14 +1,18 @@
 package br.com.squadjoaquina.errorlogger.controller;
 
+import br.com.squadjoaquina.errorlogger.controller.paramenum.Criteria;
 import br.com.squadjoaquina.errorlogger.dto.ErrorDTO;
+import br.com.squadjoaquina.errorlogger.dto.ErrorResumeDTO;
 import br.com.squadjoaquina.errorlogger.model.Environment;
 import br.com.squadjoaquina.errorlogger.service.ErrorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("v1/error")
@@ -32,16 +36,40 @@ public class ErrorController {
     }
 
     @GetMapping("/search")
-    public void search(@RequestParam("search_term") String searchTerm,
-                       @RequestParam("search_criteria") String searchCriteria,
-                       @RequestParam("order_by") String orderBy,
-                       @RequestParam(name = "environment") Environment environment) {
+    public ResponseEntity<List<ErrorResumeDTO>> search(
+            @RequestParam(value = "environment") Environment environment,
+            @RequestParam(value = "criteria", required = false, defaultValue
+                    = "NOT_REQUESTED")
+                    Criteria criteria,
+            @RequestParam(value = "term", required = false)
+                    String term)
+            throws MissingServletRequestParameterException {
+
+
+        if (criteria != null &&
+            !criteria.equals(Criteria.NOT_REQUESTED) &&
+            (term == null || term.isEmpty())) {
+            throw new MissingServletRequestParameterException("term",
+                                                              String.class.getSimpleName());
+        }
+
+        if ((term != null && !term.isEmpty()) &&
+            (criteria == null || criteria.equals(Criteria.NOT_REQUESTED))) {
+            throw new MissingServletRequestParameterException("criteria",
+                                                              Criteria.class.getSimpleName());
+
+        }
+        return new ResponseEntity<>(errorService.search(environment,
+                                                        criteria,
+                                                        term),
+                                    HttpStatus.OK);
     }
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         errorService.delete(id);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.noContent()
+                             .build();
     }
 
     @RequestMapping("/stash/{id}")
