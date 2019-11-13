@@ -1,12 +1,8 @@
 package br.com.squadjoaquina.errorlogger.service;
 
-import br.com.squadjoaquina.errorlogger.controller.paramenum.Criteria;
 import br.com.squadjoaquina.errorlogger.dto.ErrorDTO;
-import br.com.squadjoaquina.errorlogger.dto.ErrorResumeDTO;
 import br.com.squadjoaquina.errorlogger.mapper.ErrorMapper;
-import br.com.squadjoaquina.errorlogger.model.Environment;
 import br.com.squadjoaquina.errorlogger.model.Error;
-import br.com.squadjoaquina.errorlogger.model.Level;
 import br.com.squadjoaquina.errorlogger.repository.ErrorRepository;
 import br.com.squadjoaquina.errorlogger.service.exception.ErrorNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +10,6 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
-import java.util.List;
 import java.util.Optional;
 
 @Service
