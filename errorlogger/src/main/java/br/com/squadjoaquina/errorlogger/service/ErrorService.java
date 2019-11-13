@@ -64,19 +64,4 @@ public class ErrorService {
             return "Erro arquivado com sucesso!";
         }
     }
-
-    public List<ErrorResumeDTO> search(Environment environment,
-                                       Criteria criteria, String term) {
-        switch (criteria) {
-            case DESCRIPTION:
-                return errorRepository.searchByTitle(environment, term);
-            case ORIGIN:
-                return errorRepository.searchByOrigin(environment, term);
-            case LEVEL:
-                return errorRepository.searchByLevel(environment,
-                                                     Level.valueOf(term));
-            default:
-                return errorRepository.baseSearch(environment);
-        }
-    }
 }

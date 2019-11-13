@@ -2,9 +2,10 @@ package br.com.squadjoaquina.errorlogger.controller;
 
 import br.com.squadjoaquina.errorlogger.controller.paramenum.Criteria;
 import br.com.squadjoaquina.errorlogger.dto.ErrorDTO;
-import br.com.squadjoaquina.errorlogger.dto.ErrorResumeDTO;
 import br.com.squadjoaquina.errorlogger.model.Environment;
+import br.com.squadjoaquina.errorlogger.model.SummaryAggregateErrors;
 import br.com.squadjoaquina.errorlogger.service.ErrorService;
+import br.com.squadjoaquina.errorlogger.service.SummaryAggregateErrorsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,10 +20,13 @@ import java.util.List;
 public class ErrorController {
 
     public final ErrorService errorService;
+    public final SummaryAggregateErrorsService aggregateErrorsService;
 
     @Autowired
-    public ErrorController(ErrorService errorService) {
+    public ErrorController(ErrorService errorService,
+                           SummaryAggregateErrorsService aggregateErrorsService) {
         this.errorService = errorService;
+        this.aggregateErrorsService = aggregateErrorsService;
     }
 
     @GetMapping("/{id}")
@@ -36,7 +40,7 @@ public class ErrorController {
     }
 
     @GetMapping("/search")
-    public ResponseEntity<List<ErrorResumeDTO>> search(
+    public ResponseEntity<List<SummaryAggregateErrors>> search(
             @RequestParam(value = "environment") Environment environment,
             @RequestParam(value = "criteria", required = false, defaultValue
                     = "NOT_REQUESTED")
@@ -59,9 +63,9 @@ public class ErrorController {
                                                               Criteria.class.getSimpleName());
 
         }
-        return new ResponseEntity<>(errorService.search(environment,
-                                                        criteria,
-                                                        term),
+        return new ResponseEntity<>(aggregateErrorsService.search(environment,
+                                                                  criteria,
+                                                                  term),
                                     HttpStatus.OK);
     }
 
