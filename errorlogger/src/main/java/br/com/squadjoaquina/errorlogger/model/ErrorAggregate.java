@@ -1,6 +1,5 @@
 package br.com.squadjoaquina.errorlogger.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Subselect;
@@ -42,8 +41,8 @@ public class ErrorAggregate {
     @Enumerated(EnumType.STRING)
     private Environment environment;
 
-    //A Id is always necessary for a jpa entity.
-    // This seems the most suitable field for it.
+    //A JPA entity must have an Id.
+    //This seems the most suitable field for it.
     @Id
     private Long lastErrorId;
 

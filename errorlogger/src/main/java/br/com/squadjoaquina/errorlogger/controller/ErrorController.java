@@ -1,19 +1,24 @@
 package br.com.squadjoaquina.errorlogger.controller;
 
-import br.com.squadjoaquina.errorlogger.controller.paramenum.Criteria;
 import br.com.squadjoaquina.errorlogger.dto.ErrorDTO;
-import br.com.squadjoaquina.errorlogger.model.Environment;
 import br.com.squadjoaquina.errorlogger.model.ErrorAggregate;
-import br.com.squadjoaquina.errorlogger.service.ErrorService;
 import br.com.squadjoaquina.errorlogger.service.ErrorAggregateService;
+import br.com.squadjoaquina.errorlogger.service.ErrorService;
+import net.kaczmarzyk.spring.data.jpa.domain.Equal;
+import net.kaczmarzyk.spring.data.jpa.domain.LikeIgnoreCase;
+import net.kaczmarzyk.spring.data.jpa.web.annotation.And;
+import net.kaczmarzyk.spring.data.jpa.web.annotation.OnTypeMismatch;
+import net.kaczmarzyk.spring.data.jpa.web.annotation.Spec;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
 
 @RestController
 @RequestMapping("v1/error")
@@ -39,34 +44,21 @@ public class ErrorController {
         return new ResponseEntity<>(errorService.save(error), HttpStatus.OK);
     }
 
-    @GetMapping("/search")
-    public ResponseEntity<List<ErrorAggregate>> search(
-            @RequestParam(value = "environment") Environment environment,
-            @RequestParam(value = "criteria", required = false, defaultValue
-                    = "NOT_REQUESTED")
-                    Criteria criteria,
-            @RequestParam(value = "term", required = false)
-                    String term)
-            throws MissingServletRequestParameterException {
+    @GetMapping(value = "/search", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Page<ErrorAggregate>> search(
+            @And({
+                    @Spec(path = "environment", spec = Equal.class,
+                            onTypeMismatch = OnTypeMismatch.EXCEPTION),
+                    @Spec(path = "level", spec = Equal.class,
+                            onTypeMismatch = OnTypeMismatch.EXCEPTION),
+                    @Spec(path = "origin", spec = LikeIgnoreCase.class),
+                    @Spec(path = "title", spec = LikeIgnoreCase.class)
+            }) Specification<ErrorAggregate> errorAggregateSpec,
+            Pageable pageable) {
 
-
-        if (criteria != null &&
-            !criteria.equals(Criteria.NOT_REQUESTED) &&
-            (term == null || term.isEmpty())) {
-            throw new MissingServletRequestParameterException("term",
-                                                              String.class.getSimpleName());
-        }
-
-        if ((term != null && !term.isEmpty()) &&
-            (criteria == null || criteria.equals(Criteria.NOT_REQUESTED))) {
-            throw new MissingServletRequestParameterException("criteria",
-                                                              Criteria.class.getSimpleName());
-
-        }
-        return new ResponseEntity<>(errorAggregateService.search(environment,
-                                                                 criteria,
-                                                                 term),
-                                    HttpStatus.OK);
+        return new ResponseEntity<>(
+                errorAggregateService.search(errorAggregateSpec, pageable),
+                HttpStatus.OK);
     }
 
     @DeleteMapping("/delete/{id}")
