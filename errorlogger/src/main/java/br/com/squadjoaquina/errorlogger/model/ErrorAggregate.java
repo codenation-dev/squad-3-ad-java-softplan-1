@@ -30,6 +30,8 @@ import java.util.Date;
            "    MAX(e.created_at) as last_error_date," +
            "    COUNT(e.id) as events " +
            "FROM error e " +
+           "WHERE " +
+           "    e.archived = false " +
            "GROUP BY " +
            "    e.environment, " +
            "    e.level, " +
