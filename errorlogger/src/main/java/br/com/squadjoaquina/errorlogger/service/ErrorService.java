@@ -12,7 +12,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
-import java.util.*;
+import java.util.Optional;
 
 @Service
 public class ErrorService {
@@ -33,8 +33,9 @@ public class ErrorService {
         }
     }
 
-    public void save(ErrorDTO errorDTO) {
-        errorRepository.save(ErrorMapper.toError(errorDTO));
+    public ErrorDTO save(ErrorDTO errorDTO) {
+        Error savedError = errorRepository.save(ErrorMapper.toError(errorDTO));
+        return ErrorMapper.toDTO(savedError);
     }
 
     public void delete(Long id) {

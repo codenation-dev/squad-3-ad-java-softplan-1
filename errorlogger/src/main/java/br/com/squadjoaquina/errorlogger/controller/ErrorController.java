@@ -57,10 +57,9 @@ public class ErrorController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> save(@Valid @RequestBody ErrorDTO error) {
-        errorService.save(error);
-        return ResponseEntity.status(HttpStatus.CREATED)
-                             .build();
+    public ResponseEntity<ErrorDTO> save(@Valid @RequestBody ErrorDTO error) {
+        return new ResponseEntity<>(errorService.save(error),
+                                    HttpStatus.CREATED);
     }
 
     @PatchMapping("/{id}/archived")
