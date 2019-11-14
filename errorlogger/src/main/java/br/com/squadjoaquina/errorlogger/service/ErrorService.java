@@ -31,10 +31,8 @@ public class ErrorService {
         }
     }
 
-    public String save(ErrorDTO errorDTO) {
-        errorDTO.setCreatedAt(new Timestamp(System.currentTimeMillis()));
+    public void save(ErrorDTO errorDTO) {
         errorRepository.save(ErrorMapper.toError(errorDTO));
-        return "Erro salvo com sucesso!";
     }
 
     public void delete(Long id) {
@@ -45,18 +43,17 @@ public class ErrorService {
         }
     }
 
-    public String stach(Long id) {
-//        if (getById(id).equals(new ErrorNotFoundException())) {
-//            return "O erro escolhido não existe no sistema!";
-//        } else {
+    public boolean stash(Long id) {
+        boolean alreadyArchived;
         ErrorDTO error = getById(id);
         if (error.isArchived()) {
-            return "O erro escolhido já está arquivado!";
+            alreadyArchived = true;
         } else {
             error.setArchived(true);
             error.setArchivedAt(new Timestamp(System.currentTimeMillis()));
             errorRepository.save(ErrorMapper.toError(error));
-            return "Erro arquivado com sucesso!";
+            alreadyArchived = false;
         }
+        return alreadyArchived;
     }
 }

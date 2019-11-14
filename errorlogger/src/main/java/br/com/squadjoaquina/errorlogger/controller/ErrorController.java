@@ -39,9 +39,9 @@ public class ErrorController {
     }
 
     @PostMapping
-    public ResponseEntity<String> save(@Valid @RequestBody ErrorDTO error) {
-        return new ResponseEntity<>(errorService.save(error),
-                                    HttpStatus.CREATED);
+    public ResponseEntity<Void> save(@Valid @RequestBody ErrorDTO error) {
+        errorService.save(error);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @GetMapping
@@ -69,7 +69,13 @@ public class ErrorController {
     }
 
     @PatchMapping("/{id}/archived")
-    public ResponseEntity<String> stash(@PathVariable("id") Long id) {
-        return new ResponseEntity<>(errorService.stach(id), HttpStatus.OK);
+    public ResponseEntity<Void> stash(@PathVariable("id") Long id) {
+        boolean alreadyArchived = errorService.stash(id);
+        if (alreadyArchived) {
+            // Status code 409 is returned to indicate conflicting state.
+            return ResponseEntity.status(HttpStatus.CONFLICT).build();
+        } else {
+            return ResponseEntity.noContent().build();
+        }
     }
 }
