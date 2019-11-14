@@ -1,7 +1,6 @@
 package br.com.squadjoaquina.errorlogger.controller.advice;
 
 import br.com.squadjoaquina.errorlogger.service.exception.ErrorNotFoundException;
-import com.google.gson.Gson;
 import net.kaczmarzyk.spring.data.jpa.utils.Converter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,8 +19,9 @@ public class ErrorControllerExceptionHandler {
                              .build();
     }
 
+    //Será que eu preciso retornar json?
     @ExceptionHandler(value = Converter.ValueRejectedException.class)
-    ResponseEntity<String> handleConverterException(
+    ResponseEntity<Map<String, Object>> handleConverterException(
             Converter.ValueRejectedException exception) {
 
         HttpStatus status = HttpStatus.BAD_REQUEST;
@@ -37,8 +37,7 @@ public class ErrorControllerExceptionHandler {
         map.put("error", status.getReasonPhrase());
         map.put("message", message);
 
-
-        return new ResponseEntity<>(new Gson().toJson(map), status);
+        return new ResponseEntity<>(map, status);
     }
 
 }

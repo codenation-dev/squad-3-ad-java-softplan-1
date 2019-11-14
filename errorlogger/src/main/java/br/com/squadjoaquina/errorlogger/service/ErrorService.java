@@ -1,6 +1,8 @@
 package br.com.squadjoaquina.errorlogger.service;
 
+import br.com.squadjoaquina.errorlogger.dto.ErrorArchivingDTO;
 import br.com.squadjoaquina.errorlogger.dto.ErrorDTO;
+import br.com.squadjoaquina.errorlogger.mapper.ErrorArchivingMapper;
 import br.com.squadjoaquina.errorlogger.mapper.ErrorMapper;
 import br.com.squadjoaquina.errorlogger.model.Error;
 import br.com.squadjoaquina.errorlogger.repository.ErrorRepository;
@@ -31,10 +33,9 @@ public class ErrorService {
         }
     }
 
-    public String save(ErrorDTO errorDTO) {
-        errorDTO.setCreatedAt(new Timestamp(System.currentTimeMillis()));
-        errorRepository.save(ErrorMapper.toError(errorDTO));
-        return "Erro salvo com sucesso!";
+    public ErrorDTO save(ErrorDTO errorDTO) {
+        Error savedError = errorRepository.save(ErrorMapper.toError(errorDTO));
+        return ErrorMapper.toDTO(savedError);
     }
 
     public void delete(Long id) {
@@ -45,18 +46,16 @@ public class ErrorService {
         }
     }
 
-    public String stach(Long id) {
-//        if (getById(id).equals(new ErrorNotFoundException())) {
-//            return "O erro escolhido não existe no sistema!";
-//        } else {
+    public ErrorArchivingDTO stash(Long id) {
         ErrorDTO error = getById(id);
         if (error.isArchived()) {
-            return "O erro escolhido já está arquivado!";
+            error.setArchived(false);
         } else {
             error.setArchived(true);
-            error.setArchivedAt(new Timestamp(System.currentTimeMillis()));
-            errorRepository.save(ErrorMapper.toError(error));
-            return "Erro arquivado com sucesso!";
+            error.setLastArchivedDate(
+                    new Timestamp(System.currentTimeMillis()));
         }
+        Error savedError = errorRepository.save(ErrorMapper.toError(error));
+        return ErrorArchivingMapper.toDTO(savedError);
     }
 }

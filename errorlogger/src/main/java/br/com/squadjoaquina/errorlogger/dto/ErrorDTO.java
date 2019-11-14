@@ -34,7 +34,7 @@ public class ErrorDTO {
 
     private boolean archived = false;
 
-    private Timestamp archivedAt;
+    private Timestamp lastArchivedDate;
 
     private Timestamp createdAt;
 }

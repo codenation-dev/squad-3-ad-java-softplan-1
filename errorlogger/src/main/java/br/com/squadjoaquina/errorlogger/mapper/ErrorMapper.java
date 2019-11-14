@@ -5,11 +5,11 @@ import br.com.squadjoaquina.errorlogger.model.Error;
 
 public class ErrorMapper {
 
-    private ErrorMapper(){
+    private ErrorMapper() {
         super();
     }
 
-    public static Error toError (ErrorDTO errorDTO){
+    public static Error toError(ErrorDTO errorDTO) {
         Error error = new Error();
 
         error.setId(errorDTO.getId());
@@ -21,11 +21,11 @@ public class ErrorMapper {
         error.setOrigin(errorDTO.getOrigin());
         error.setTitle(errorDTO.getTitle());
         error.setUserID(errorDTO.getUserID());
-        error.setArchivedAt(errorDTO.getArchivedAt());
+        error.setLastArchivedDate(errorDTO.getLastArchivedDate());
         return error;
     }
 
-    public static ErrorDTO toDTO (Error error){
+    public static ErrorDTO toDTO(Error error) {
         ErrorDTO errorDTO = new ErrorDTO();
 
         errorDTO.setId(error.getId());
@@ -37,7 +37,7 @@ public class ErrorMapper {
         errorDTO.setOrigin(error.getOrigin());
         errorDTO.setTitle(error.getTitle());
         errorDTO.setUserID(error.getUserID());
-        errorDTO.setArchivedAt(error.getArchivedAt());
+        errorDTO.setLastArchivedDate(error.getLastArchivedDate());
         return errorDTO;
     }
 }

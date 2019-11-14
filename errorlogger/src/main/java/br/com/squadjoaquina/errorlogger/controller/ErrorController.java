@@ -1,5 +1,6 @@
 package br.com.squadjoaquina.errorlogger.controller;
 
+import br.com.squadjoaquina.errorlogger.dto.ErrorArchivingDTO;
 import br.com.squadjoaquina.errorlogger.dto.ErrorDTO;
 import br.com.squadjoaquina.errorlogger.model.ErrorAggregate;
 import br.com.squadjoaquina.errorlogger.service.ErrorAggregateService;
@@ -14,7 +15,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -39,12 +39,7 @@ public class ErrorController {
         return new ResponseEntity<>(errorService.getById(id), HttpStatus.OK);
     }
 
-    @PostMapping("/save")
-    public ResponseEntity<String> save(@Valid @RequestBody ErrorDTO error) {
-        return new ResponseEntity<>(errorService.save(error), HttpStatus.OK);
-    }
-
-    @GetMapping(value = "/search", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping
     public ResponseEntity<Page<ErrorAggregate>> search(
             @And({
                     @Spec(path = "environment", spec = Equal.class,
@@ -61,15 +56,23 @@ public class ErrorController {
                 HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
+    @PostMapping
+    public ResponseEntity<ErrorDTO> save(@Valid @RequestBody ErrorDTO error) {
+        return new ResponseEntity<>(errorService.save(error),
+                                    HttpStatus.CREATED);
+    }
+
+    @PatchMapping("/{id}/archived")
+    public ResponseEntity<ErrorArchivingDTO> stash(
+            @PathVariable("id") Long id) {
+        ErrorArchivingDTO dto = errorService.stash(id);
+        return new ResponseEntity<>(dto, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable("id") Long id) {
         errorService.delete(id);
         return ResponseEntity.noContent()
                              .build();
-    }
-
-    @RequestMapping("/stash/{id}")
-    public ResponseEntity<String> stash(@PathVariable Long id) {
-        return new ResponseEntity<>(errorService.stach(id), HttpStatus.OK);
     }
 }
