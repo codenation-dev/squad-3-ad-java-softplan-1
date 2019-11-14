@@ -24,8 +24,7 @@ public class SwaggerConfig {
                 .apis(RequestHandlerSelectors.basePackage(
                         "br.com.squadjoaquina.errorlogger"))
                 .paths(PathSelectors.any())
-                .build().apiInfo(metaData()).useDefaultResponseMessages(false).ignoredParameterTypes(
-                        Pageable.class, Sort.class);
+                .build().apiInfo(metaData()).useDefaultResponseMessages(false);
 
         return docket;
     }
