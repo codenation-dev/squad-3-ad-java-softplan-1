@@ -2,21 +2,17 @@ package br.com.squadjoaquina.errorlogger.controller;
 
 import br.com.squadjoaquina.errorlogger.dto.ErrorArchivingStatusDTO;
 import br.com.squadjoaquina.errorlogger.dto.ErrorDTO;
+import br.com.squadjoaquina.errorlogger.model.Environment;
 import br.com.squadjoaquina.errorlogger.model.ErrorAggregate;
+import br.com.squadjoaquina.errorlogger.model.Level;
 import br.com.squadjoaquina.errorlogger.service.ErrorAggregateService;
 import br.com.squadjoaquina.errorlogger.service.ErrorService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
-import net.kaczmarzyk.spring.data.jpa.domain.Equal;
-import net.kaczmarzyk.spring.data.jpa.domain.LikeIgnoreCase;
-import net.kaczmarzyk.spring.data.jpa.web.annotation.And;
-import net.kaczmarzyk.spring.data.jpa.web.annotation.OnTypeMismatch;
-import net.kaczmarzyk.spring.data.jpa.web.annotation.Spec;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -69,18 +65,19 @@ public class ErrorController {
     })
     @GetMapping(produces = "application/json")
     public ResponseEntity<Page<ErrorAggregate>> search(
-            @And({
-                    @Spec(path = "environment", spec = Equal.class,
-                            onTypeMismatch = OnTypeMismatch.EXCEPTION),
-                    @Spec(path = "level", spec = Equal.class,
-                            onTypeMismatch = OnTypeMismatch.EXCEPTION),
-                    @Spec(path = "origin", spec = LikeIgnoreCase.class),
-                    @Spec(path = "title", spec = LikeIgnoreCase.class)
-            }) Specification<ErrorAggregate> errorAggregateSpec,
+            @RequestParam(value = "environment", required = false) Environment environment,
+            @RequestParam(value = "level", required = false) Level level,
+            @RequestParam(value = "origin", required = false) String origin,
+            @RequestParam(value = "title", required = false) String title,
             Pageable pageable) {
 
+
         return new ResponseEntity<>(
-                errorAggregateService.search(errorAggregateSpec, pageable),
+                errorAggregateService.search(environment,
+                                             level,
+                                             origin,
+                                             title,
+                                             pageable),
                 HttpStatus.OK);
     }
 
