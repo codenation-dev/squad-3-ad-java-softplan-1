@@ -40,7 +40,8 @@ public class ErrorController {
 
     @PostMapping
     public ResponseEntity<String> save(@Valid @RequestBody ErrorDTO error) {
-        return new ResponseEntity<>(errorService.save(error), HttpStatus.OK);
+        return new ResponseEntity<>(errorService.save(error),
+                                    HttpStatus.CREATED);
     }
 
     @GetMapping
