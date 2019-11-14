@@ -43,9 +43,9 @@ public class Error {
     @Enumerated(EnumType.STRING)
     private Environment environment;
 
-    private boolean archived = false;
+    private boolean archived;
 
-    private Timestamp archivedAt;
+    private Timestamp lastArchivedDate;
 
     @Column(updatable = false)
     @CreatedDate

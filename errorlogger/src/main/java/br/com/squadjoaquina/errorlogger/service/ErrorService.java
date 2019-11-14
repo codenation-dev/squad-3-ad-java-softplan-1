@@ -1,6 +1,8 @@
 package br.com.squadjoaquina.errorlogger.service;
 
+import br.com.squadjoaquina.errorlogger.dto.ErrorArchivingDTO;
 import br.com.squadjoaquina.errorlogger.dto.ErrorDTO;
+import br.com.squadjoaquina.errorlogger.mapper.ErrorArchivingMapper;
 import br.com.squadjoaquina.errorlogger.mapper.ErrorMapper;
 import br.com.squadjoaquina.errorlogger.model.Error;
 import br.com.squadjoaquina.errorlogger.repository.ErrorRepository;
@@ -10,7 +12,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class ErrorService {
@@ -43,17 +45,16 @@ public class ErrorService {
         }
     }
 
-    public boolean stash(Long id) {
-        boolean alreadyArchived;
+    public ErrorArchivingDTO stash(Long id) {
         ErrorDTO error = getById(id);
         if (error.isArchived()) {
-            alreadyArchived = true;
+            error.setArchived(false);
         } else {
             error.setArchived(true);
-            error.setArchivedAt(new Timestamp(System.currentTimeMillis()));
-            errorRepository.save(ErrorMapper.toError(error));
-            alreadyArchived = false;
+            error.setLastArchivedDate(
+                    new Timestamp(System.currentTimeMillis()));
         }
-        return alreadyArchived;
+        Error savedError = errorRepository.save(ErrorMapper.toError(error));
+        return ErrorArchivingMapper.toDTO(savedError);
     }
 }

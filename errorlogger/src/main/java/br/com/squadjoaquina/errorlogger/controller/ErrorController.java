@@ -1,5 +1,6 @@
 package br.com.squadjoaquina.errorlogger.controller;
 
+import br.com.squadjoaquina.errorlogger.dto.ErrorArchivingDTO;
 import br.com.squadjoaquina.errorlogger.dto.ErrorDTO;
 import br.com.squadjoaquina.errorlogger.model.ErrorAggregate;
 import br.com.squadjoaquina.errorlogger.service.ErrorAggregateService;
@@ -38,12 +39,6 @@ public class ErrorController {
         return new ResponseEntity<>(errorService.getById(id), HttpStatus.OK);
     }
 
-    @PostMapping
-    public ResponseEntity<Void> save(@Valid @RequestBody ErrorDTO error) {
-        errorService.save(error);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
-    }
-
     @GetMapping
     public ResponseEntity<Page<ErrorAggregate>> search(
             @And({
@@ -61,21 +56,24 @@ public class ErrorController {
                 HttpStatus.OK);
     }
 
+    @PostMapping
+    public ResponseEntity<Void> save(@Valid @RequestBody ErrorDTO error) {
+        errorService.save(error);
+        return ResponseEntity.status(HttpStatus.CREATED)
+                             .build();
+    }
+
+    @PatchMapping("/{id}/archived")
+    public ResponseEntity<ErrorArchivingDTO> stash(
+            @PathVariable("id") Long id) {
+        ErrorArchivingDTO dto = errorService.stash(id);
+        return new ResponseEntity<>(dto, HttpStatus.OK);
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable("id") Long id) {
         errorService.delete(id);
         return ResponseEntity.noContent()
                              .build();
-    }
-
-    @PatchMapping("/{id}/archived")
-    public ResponseEntity<Void> stash(@PathVariable("id") Long id) {
-        boolean alreadyArchived = errorService.stash(id);
-        if (alreadyArchived) {
-            //Returns status code 409 to indicate conflicting state (rfc5789).
-            return ResponseEntity.status(HttpStatus.CONFLICT).build();
-        } else {
-            return ResponseEntity.noContent().build();
-        }
     }
 }
