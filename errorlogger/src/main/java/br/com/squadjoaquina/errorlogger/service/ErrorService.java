@@ -1,8 +1,8 @@
 package br.com.squadjoaquina.errorlogger.service;
 
-import br.com.squadjoaquina.errorlogger.dto.ErrorArchivingDTO;
+import br.com.squadjoaquina.errorlogger.dto.ErrorArchivingStatusDTO;
 import br.com.squadjoaquina.errorlogger.dto.ErrorDTO;
-import br.com.squadjoaquina.errorlogger.mapper.ErrorArchivingMapper;
+import br.com.squadjoaquina.errorlogger.mapper.ErrorArchivingStatusMapper;
 import br.com.squadjoaquina.errorlogger.mapper.ErrorMapper;
 import br.com.squadjoaquina.errorlogger.model.Error;
 import br.com.squadjoaquina.errorlogger.repository.ErrorRepository;
@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
-import java.sql.Timestamp;
+import java.sql.Date;
 import java.util.Optional;
 
 @Service
@@ -46,16 +46,15 @@ public class ErrorService {
         }
     }
 
-    public ErrorArchivingDTO stash(Long id) {
+    public ErrorArchivingStatusDTO stash(Long id) {
         ErrorDTO error = getById(id);
         if (error.isArchived()) {
             error.setArchived(false);
         } else {
             error.setArchived(true);
-            error.setLastArchivedDate(
-                    new Timestamp(System.currentTimeMillis()));
+            error.setLastArchivedDate(new Date(System.currentTimeMillis()));
         }
         Error savedError = errorRepository.save(ErrorMapper.toError(error));
-        return ErrorArchivingMapper.toDTO(savedError);
+        return ErrorArchivingStatusMapper.toDTO(savedError);
     }
 }

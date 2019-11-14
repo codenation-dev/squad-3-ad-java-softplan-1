@@ -9,7 +9,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.sql.Timestamp;
+import java.util.Date;
 
 @Entity
 @Setter
@@ -45,9 +45,9 @@ public class Error {
 
     private boolean archived;
 
-    private Timestamp lastArchivedDate;
+    private Date lastArchivedDate;
 
     @Column(updatable = false)
     @CreatedDate
-    private Timestamp createdAt;
+    private Date createdAt;
 }

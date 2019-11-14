@@ -1,5 +1,7 @@
 package br.com.squadjoaquina.errorlogger.model;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Subselect;
@@ -11,6 +13,10 @@ import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import java.util.Date;
 
+@ApiModel(description = "Agregado de erros do mesmo tipo. \n" +
+                        "Dois erros são considerados do mesmo tipo quando " +
+                        "eles tem os mesmos valores de: enviornment, level, " +
+                        "origin e title.")
 @Getter
 @NoArgsConstructor
 @Entity
@@ -31,23 +37,30 @@ import java.util.Date;
            "    e.title")
 public class ErrorAggregate {
 
+    @ApiModelProperty(notes = "Level de severidade do erro")
     @Enumerated(EnumType.STRING)
     private Level level;
 
+    @ApiModelProperty(notes = "Aplicação que deu origem ao erro.")
     private String origin;
 
+    @ApiModelProperty(notes = "Título do erro.")
     private String title;
 
+    @ApiModelProperty(notes = "Ambiente no qual ocorreu o erro.")
     @Enumerated(EnumType.STRING)
     private Environment environment;
 
+    @ApiModelProperty(notes = "Id do último erro deste tipo ocorrido.")
     //A JPA entity must have an Id.
     //This seems the most suitable field for it.
     @Id
     private Long lastErrorId;
 
+    @ApiModelProperty(notes = "Data de ocorrência do último erro deste tipo")
     private Date lastErrorDate;
 
+    @ApiModelProperty(notes = "Número de erros deste tipo registrados.")
     private Long events;
 
 }
