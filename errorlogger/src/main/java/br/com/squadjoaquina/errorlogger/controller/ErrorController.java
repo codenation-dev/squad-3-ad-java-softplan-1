@@ -72,7 +72,7 @@ public class ErrorController {
     public ResponseEntity<Void> stash(@PathVariable("id") Long id) {
         boolean alreadyArchived = errorService.stash(id);
         if (alreadyArchived) {
-            // Status code 409 is returned to indicate conflicting state.
+            //Returns status code 409 to indicate conflicting state (rfc5789).
             return ResponseEntity.status(HttpStatus.CONFLICT).build();
         } else {
             return ResponseEntity.noContent().build();
