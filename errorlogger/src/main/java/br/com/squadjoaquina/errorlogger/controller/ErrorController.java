@@ -62,7 +62,7 @@ public class ErrorController {
                     message = "Você não possui autorização para utilizar este" +
                               " recurso.")
     })
-    @GetMapping(produces = "application/json")
+    @GetMapping(value = "/aggregates",produces = "application/json")
     public ResponseEntity<Page<ErrorAggregate>> search(
             @RequestParam(value = "environment", required = false) Environment environment,
             @RequestParam(value = "level", required = false) Level level,
