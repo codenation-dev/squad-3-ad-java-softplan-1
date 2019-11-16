@@ -19,7 +19,8 @@ public class ErrorControllerExceptionHandler {
     @ExceptionHandler(value = ErrorAlreadyArchivedException.class)
     ResponseEntity<Void> handleErrorNotFound(
             ErrorAlreadyArchivedException e) {
-        return ResponseEntity.status(HttpStatus.CONFLICT).build();
+        return ResponseEntity.status(HttpStatus.CONFLICT)
+                             .build();
     }
 
 }

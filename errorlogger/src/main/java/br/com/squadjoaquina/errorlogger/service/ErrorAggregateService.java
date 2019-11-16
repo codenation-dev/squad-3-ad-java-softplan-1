@@ -14,12 +14,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class ErrorAggregateService {
 
-    private final ErrorAggregateRepository repository;
+    private final ErrorAggregateRepository errorAggregateRepository;
 
     @Autowired
     public ErrorAggregateService(
             ErrorAggregateRepository repository) {
-        this.repository = repository;
+        this.errorAggregateRepository = repository;
     }
 
     public Page<ErrorAggregate> search(Environment environment,
@@ -30,7 +30,7 @@ public class ErrorAggregateService {
 
         Specification<ErrorAggregate> errorAggregateSpecs = buildSpecs(
                 environment, level, origin, title);
-        return repository.findAll(errorAggregateSpecs, pageable);
+        return errorAggregateRepository.findAll(errorAggregateSpecs, pageable);
 
     }
 
@@ -47,9 +47,7 @@ public class ErrorAggregateService {
         Specification<ErrorAggregate> titleSpec =
                 ErrorAggregateSpecs.titleLike(title);
 
-        Specification<ErrorAggregate> specs = environmentSpec.and(
-                levelSpec.and(originSpec.and(titleSpec)));
-        return specs;
+        return environmentSpec.and(levelSpec.and(originSpec.and(titleSpec)));
     }
 
 
