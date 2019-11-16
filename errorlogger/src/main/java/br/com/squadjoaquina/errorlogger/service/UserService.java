@@ -1,9 +1,14 @@
 package br.com.squadjoaquina.errorlogger.service;
 
+import br.com.squadjoaquina.errorlogger.dto.UserDTO;
+import br.com.squadjoaquina.errorlogger.mapper.UserMapper;
 import br.com.squadjoaquina.errorlogger.model.User;
 import br.com.squadjoaquina.errorlogger.repository.UserRepository;
+import br.com.squadjoaquina.errorlogger.service.exception.ErrorNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -15,4 +20,31 @@ public class UserService {
     }
 
     //TODO: ADD METHODS FOR HANDLING USERS.
+
+    public UserDTO findById(Long id) {
+        Optional<User> userOptional = userRepository.findById(id);
+        if(userOptional.isPresent()) {
+            return UserMapper.toUserDTO(userOptional.get());
+        } else throw new ErrorNotFoundException();
+    }
+
+    public UserDTO findByEmail(String email) {
+        Optional<User> userOptional = userRepository.findByEmail(email);
+        if(userOptional.isPresent()) {
+            return UserMapper.toUserDTO(userOptional.get());
+        } else throw new ErrorNotFoundException();
+    }
+    public UserDTO findByLogin(String login) {
+        Optional<User> userOptional = userRepository.findByLogin(login);
+        if(userOptional.isPresent()) {
+            return UserMapper.toUserDTO(userOptional.get());
+        } else throw new ErrorNotFoundException();
+    }
+    public void save(UserDTO userDTO) {
+        userRepository.save(UserMapper.toUser(userDTO));
+    }
+
+    public long count() {
+        return userRepository.count();
+    }
 }
