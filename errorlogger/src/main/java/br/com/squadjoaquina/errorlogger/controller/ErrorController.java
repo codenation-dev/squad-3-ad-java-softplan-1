@@ -63,7 +63,7 @@ public class ErrorController {
                               " recurso.")
     })
     @GetMapping(value = "/aggregates",produces = "application/json")
-    public ResponseEntity<Page<ErrorAggregate>> search(
+    public ResponseEntity<Page<ErrorAggregate>> searchAggregates(
             @RequestParam(value = "environment", required = false) Environment environment,
             @RequestParam(value = "level", required = false) Level level,
             @RequestParam(value = "origin", required = false) String origin,
