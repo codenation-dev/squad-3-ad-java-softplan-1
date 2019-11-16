@@ -57,7 +57,7 @@ public class ErrorController {
                     message = "Agregado de erros retornado com sucesso."),
             @ApiResponse(code = 400,
                     message = "A requisição enviada possui parâmetros " +
-                              "inváidos."),
+                              "inválidos."),
             @ApiResponse(code = 401,
                     message = "Você não possui autorização para utilizar este" +
                               " recurso.")
@@ -87,7 +87,7 @@ public class ErrorController {
                     message = "Erro registrado com sucesso."),
             @ApiResponse(code = 400,
                     message = "A requisição enviada possui parâmetros " +
-                              "inváidos."),
+                              "inválidos."),
             @ApiResponse(code = 401,
                     message = "Você não possui autorização para utilizar este" +
                               " recurso.")
@@ -104,7 +104,7 @@ public class ErrorController {
                     message = "Erro arquivado sucesso."),
             @ApiResponse(code = 400,
                     message = "A requisição enviada possui parâmetros " +
-                              "inváidos."),
+                              "inválidos."),
             @ApiResponse(code = 401,
                     message = "Você não possui autorização para utilizar este" +
                               " recurso."),
@@ -128,7 +128,7 @@ public class ErrorController {
                     message = "Erro excluído com sucesso."),
             @ApiResponse(code = 400,
                     message = "A requisição enviada possui parâmetros " +
-                              "inváidos."),
+                              "inválidos."),
             @ApiResponse(code = 401,
                     message = "Você não possui autorização para utilizar este" +
                               " recurso."),
