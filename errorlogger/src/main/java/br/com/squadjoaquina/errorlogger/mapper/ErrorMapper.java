@@ -13,7 +13,6 @@ public class ErrorMapper {
         Error error = new Error();
 
         error.setId(errorDTO.getId());
-        error.setArchived(errorDTO.isArchived());
         error.setCreatedAt(errorDTO.getCreatedAt());
         error.setDescription(errorDTO.getDescription());
         error.setEnvironment(errorDTO.getEnvironment());
@@ -21,7 +20,7 @@ public class ErrorMapper {
         error.setOrigin(errorDTO.getOrigin());
         error.setTitle(errorDTO.getTitle());
         error.setUserID(errorDTO.getUserID());
-        error.setLastArchivedDate(errorDTO.getLastArchivedDate());
+        error.setArchivedAt(errorDTO.getArchivedAt());
         return error;
     }
 
@@ -29,7 +28,6 @@ public class ErrorMapper {
         ErrorDTO errorDTO = new ErrorDTO();
 
         errorDTO.setId(error.getId());
-        errorDTO.setArchived(error.isArchived());
         errorDTO.setCreatedAt(error.getCreatedAt());
         errorDTO.setDescription(error.getDescription());
         errorDTO.setEnvironment(error.getEnvironment());
@@ -37,7 +35,7 @@ public class ErrorMapper {
         errorDTO.setOrigin(error.getOrigin());
         errorDTO.setTitle(error.getTitle());
         errorDTO.setUserID(error.getUserID());
-        errorDTO.setLastArchivedDate(error.getLastArchivedDate());
+        errorDTO.setArchivedAt(error.getArchivedAt());
         return errorDTO;
     }
 }

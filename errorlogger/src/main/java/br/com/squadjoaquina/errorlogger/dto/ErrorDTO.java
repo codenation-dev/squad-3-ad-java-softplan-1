@@ -48,11 +48,8 @@ public class ErrorDTO {
     @NotNull
     private Environment environment;
 
-    @ApiModelProperty(notes = "Status de arquivação do erro.")
-    private boolean archived;
-
-    @ApiModelProperty(notes = "Última data de arquivação do erro.")
-    private Date lastArchivedDate;
+    @ApiModelProperty(notes = "Data de arquivação do erro.")
+    private Date archivedAt;
 
     @ApiModelProperty(notes = "Data de criação do erro. Imutável.")
     private Date createdAt;

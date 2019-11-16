@@ -43,9 +43,7 @@ public class Error {
     @Enumerated(EnumType.STRING)
     private Environment environment;
 
-    private boolean archived;
-
-    private Date lastArchivedDate;
+    private Date archivedAt;
 
     @Column(updatable = false)
     @CreatedDate

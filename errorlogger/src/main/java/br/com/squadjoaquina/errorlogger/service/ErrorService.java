@@ -1,11 +1,10 @@
 package br.com.squadjoaquina.errorlogger.service;
 
-import br.com.squadjoaquina.errorlogger.dto.ErrorArchivingStatusDTO;
 import br.com.squadjoaquina.errorlogger.dto.ErrorDTO;
-import br.com.squadjoaquina.errorlogger.mapper.ErrorArchivingStatusMapper;
 import br.com.squadjoaquina.errorlogger.mapper.ErrorMapper;
 import br.com.squadjoaquina.errorlogger.model.Error;
 import br.com.squadjoaquina.errorlogger.repository.ErrorRepository;
+import br.com.squadjoaquina.errorlogger.service.exception.ErrorAlreadyArchivedException;
 import br.com.squadjoaquina.errorlogger.service.exception.ErrorNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -46,15 +45,13 @@ public class ErrorService {
         }
     }
 
-    public ErrorArchivingStatusDTO stash(Long id) {
-        ErrorDTO error = getById(id);
-        if (error.isArchived()) {
-            error.setArchived(false);
+    public void archive(Long id) {
+        ErrorDTO errorDTO = getById(id);
+        if (errorDTO.getArchivedAt() == null) {
+            errorDTO.setArchivedAt(new Date(System.currentTimeMillis()));
+            errorRepository.save(ErrorMapper.toError(errorDTO));
         } else {
-            error.setArchived(true);
-            error.setLastArchivedDate(new Date(System.currentTimeMillis()));
+            throw new ErrorAlreadyArchivedException();
         }
-        Error savedError = errorRepository.save(ErrorMapper.toError(error));
-        return ErrorArchivingStatusMapper.toDTO(savedError);
     }
 }
