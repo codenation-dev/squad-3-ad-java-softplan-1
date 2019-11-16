@@ -5,6 +5,7 @@ import br.com.squadjoaquina.errorlogger.dto.ErrorDTO;
 import br.com.squadjoaquina.errorlogger.mapper.ErrorArchivingStatusMapper;
 import br.com.squadjoaquina.errorlogger.mapper.ErrorMapper;
 import br.com.squadjoaquina.errorlogger.model.Error;
+import br.com.squadjoaquina.errorlogger.model.ErrorAggregate;
 import br.com.squadjoaquina.errorlogger.repository.ErrorRepository;
 import br.com.squadjoaquina.errorlogger.service.exception.ErrorNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -56,5 +58,13 @@ public class ErrorService {
         }
         Error savedError = errorRepository.save(ErrorMapper.toError(error));
         return ErrorArchivingStatusMapper.toDTO(savedError);
+    }
+
+    public void stashAggregates(
+            List<ErrorAggregate> aggregates) {
+    }
+
+    public void deleteAggregates(
+            List<ErrorAggregate> aggregates) {
     }
 }

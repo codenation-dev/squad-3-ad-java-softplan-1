@@ -18,6 +18,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("v1/error")
@@ -134,6 +135,43 @@ public class ErrorController {
     @DeleteMapping(value = "/{id}", produces = "application/json")
     public ResponseEntity<Void> delete(@PathVariable("id") Long id) {
         errorService.delete(id);
+        return ResponseEntity.noContent()
+                             .build();
+    }
+
+    //EXEMPLOS ARCHIVE AGGREGATE.
+
+    @PatchMapping(value = "/aggregates/{id}", produces = "application/json")
+    public ResponseEntity<Void> archiveAggregates(@PathVariable("id") Long id) {
+        //arquiva todos os erros iguais ao erro com o id passado.
+        return ResponseEntity.noContent().build();
+    }
+
+    @PatchMapping(value = "/aggregates", produces =
+            "application/json")
+    public ResponseEntity<Void> archiveAggregates(
+            @RequestBody List<ErrorAggregate> aggregates) {
+        //arquiva todos os erros pertencentes ao agregado X.
+        errorService.stashAggregates(aggregates);
+        return ResponseEntity.noContent()
+                             .build();
+    }
+
+    //EXEMPLOS DELETE AGGREGATE.
+
+    @DeleteMapping(value = "/aggregates/{id}", produces = "application/json")
+    public ResponseEntity<Void> deleteAggregates(
+            @PathVariable("id") Long id) {
+        //deleta todos os erros iguais ao erro com o id passado.
+        return ResponseEntity.noContent()
+                             .build();
+    }
+
+    @DeleteMapping(value = "/aggregates", produces = "application/json")
+    public ResponseEntity<Void> deleteAggregates(
+            @RequestBody List<ErrorAggregate> aggregates) {
+        //arquiva todos os erros pertencentes ao agregado X.
+        errorService.deleteAggregates(aggregates);
         return ResponseEntity.noContent()
                              .build();
     }
