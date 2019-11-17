@@ -1,16 +1,23 @@
 package br.com.squadjoaquina.errorlogger.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
+import java.sql.Timestamp;
+
 @Getter
 @Setter
 @NoArgsConstructor
 @Entity
+@AllArgsConstructor
+@EntityListeners(AuditingEntityListener.class)
 @Table(name = "users")
 public class User {
 
@@ -29,5 +36,8 @@ public class User {
 
     @NotNull
     private String password;
+
+    @CreatedDate
+    private Timestamp createdAt;
 
 }
