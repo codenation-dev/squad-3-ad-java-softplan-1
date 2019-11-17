@@ -4,8 +4,9 @@ import br.com.squadjoaquina.errorlogger.dto.ErrorArchivingStatusDTO;
 import br.com.squadjoaquina.errorlogger.dto.ErrorDTO;
 import br.com.squadjoaquina.errorlogger.mapper.ErrorArchivingStatusMapper;
 import br.com.squadjoaquina.errorlogger.mapper.ErrorMapper;
+import br.com.squadjoaquina.errorlogger.model.Environment;
 import br.com.squadjoaquina.errorlogger.model.Error;
-import br.com.squadjoaquina.errorlogger.model.ErrorAggregate;
+import br.com.squadjoaquina.errorlogger.model.Level;
 import br.com.squadjoaquina.errorlogger.repository.ErrorRepository;
 import br.com.squadjoaquina.errorlogger.service.exception.ErrorNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,6 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -60,11 +60,20 @@ public class ErrorService {
         return ErrorArchivingStatusMapper.toDTO(savedError);
     }
 
-    public void stashAggregates(
-            List<ErrorAggregate> aggregates) {
+    public void archiveAggregate(Environment environment,
+                                Level level,
+                                String origin,
+                                String title) {
+        errorRepository.archiveAggregate(
+                environment, level, origin, title);
+
     }
 
-    public void deleteAggregates(
-            List<ErrorAggregate> aggregates) {
+    public void deleteAggregate(Environment environment,
+                                Level level,
+                                String origin,
+                                String title) {
+        errorRepository.deleteAggregate(
+                environment, level, origin, title);
     }
 }

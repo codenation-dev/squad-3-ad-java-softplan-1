@@ -18,7 +18,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
 
 @RestController
 @RequestMapping("v1/error")
@@ -64,7 +63,7 @@ public class ErrorController {
                     message = "Você não possui autorização para utilizar este" +
                               " recurso.")
     })
-    @GetMapping(produces = "application/json")
+    @GetMapping(value = "/aggregates", produces = "application/json")
     public ResponseEntity<Page<ErrorAggregate>> search(
             @RequestParam(value = "environment", required = false) Environment environment,
             @RequestParam(value = "level", required = false) Level level,
@@ -139,40 +138,28 @@ public class ErrorController {
                              .build();
     }
 
-    //EXEMPLOS ARCHIVE AGGREGATE.
 
-    @PatchMapping(value = "/aggregates/{id}", produces = "application/json")
-    public ResponseEntity<Void> archiveAggregates(@PathVariable("id") Long id) {
-        //arquiva todos os erros iguais ao erro com o id passado.
-        return ResponseEntity.noContent().build();
-    }
-
-    @PatchMapping(value = "/aggregates", produces =
-            "application/json")
-    public ResponseEntity<Void> archiveAggregates(
-            @RequestBody List<ErrorAggregate> aggregates) {
-        //arquiva todos os erros pertencentes ao agregado X.
-        errorService.stashAggregates(aggregates);
-        return ResponseEntity.noContent()
-                             .build();
-    }
-
-    //EXEMPLOS DELETE AGGREGATE.
-
-    @DeleteMapping(value = "/aggregates/{id}", produces = "application/json")
-    public ResponseEntity<Void> deleteAggregates(
-            @PathVariable("id") Long id) {
-        //deleta todos os erros iguais ao erro com o id passado.
+    @PatchMapping(value = "/aggregates/archived", produces = "application/json")
+    public ResponseEntity<Integer> archiveAggregate(
+            @RequestParam(value = "environment", required = true) Environment environment,
+            @RequestParam(value = "level", required = true) Level level,
+            @RequestParam(value = "origin", required = true) String origin,
+            @RequestParam(value = "title", required = true) String title
+    ) {
+        errorService.archiveAggregate(environment, level, origin, title);
         return ResponseEntity.noContent()
                              .build();
     }
 
     @DeleteMapping(value = "/aggregates", produces = "application/json")
-    public ResponseEntity<Void> deleteAggregates(
-            @RequestBody List<ErrorAggregate> aggregates) {
-        //arquiva todos os erros pertencentes ao agregado X.
-        errorService.deleteAggregates(aggregates);
+    public ResponseEntity<Void> deleteAggregate(
+            @RequestParam(value = "environment", required = true) Environment environment,
+            @RequestParam(value = "level", required = true) Level level,
+            @RequestParam(value = "origin", required = true) String origin,
+            @RequestParam(value = "title", required = true) String title) {
+        errorService.deleteAggregate(environment, level, origin, title);
         return ResponseEntity.noContent()
                              .build();
     }
+
 }
