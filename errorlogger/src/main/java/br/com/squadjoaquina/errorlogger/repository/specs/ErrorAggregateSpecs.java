@@ -7,9 +7,12 @@ import org.springframework.data.jpa.domain.Specification;
 
 public class ErrorAggregateSpecs {
 
+    private ErrorAggregateSpecs() {
+    }
+
     public static Specification<ErrorAggregate> environmentEquals(
             Environment environment) {
-        return (Specification<ErrorAggregate>) (root, query, builder) -> {
+        return (root, query, builder) -> {
             if (environment == null) {
                 return builder.isTrue(builder.literal(true));
             }
@@ -19,7 +22,7 @@ public class ErrorAggregateSpecs {
     }
 
     public static Specification<ErrorAggregate> levelEquals(Level level) {
-        return (Specification<ErrorAggregate>) (root, query, builder) -> {
+        return (root, query, builder) -> {
 
             if (level == null) {
                 return builder.isTrue(builder.literal(true));
@@ -30,7 +33,7 @@ public class ErrorAggregateSpecs {
     }
 
     public static Specification<ErrorAggregate> originLike(String origin) {
-        return (Specification<ErrorAggregate>) (root, query, builder) -> {
+        return (root, query, builder) -> {
 
             if (origin == null) {
                 return builder.isTrue(builder.literal(true));
@@ -43,7 +46,7 @@ public class ErrorAggregateSpecs {
     }
 
     public static Specification<ErrorAggregate> titleLike(String title) {
-        return (Specification<ErrorAggregate>) (root, query, builder) -> {
+        return (root, query, builder) -> {
 
             if (title == null) {
                 return builder.isTrue(builder.literal(true));

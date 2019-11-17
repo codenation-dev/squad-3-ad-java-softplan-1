@@ -1,6 +1,5 @@
 package br.com.squadjoaquina.errorlogger.controller;
 
-import br.com.squadjoaquina.errorlogger.dto.ErrorArchivingStatusDTO;
 import br.com.squadjoaquina.errorlogger.dto.ErrorDTO;
 import br.com.squadjoaquina.errorlogger.model.Environment;
 import br.com.squadjoaquina.errorlogger.model.ErrorAggregate;
@@ -58,13 +57,14 @@ public class ErrorController {
                     message = "Agregado de erros retornado com sucesso."),
             @ApiResponse(code = 400,
                     message = "A requisição enviada possui parâmetros " +
-                              "inváidos."),
+                              "inválidos."),
             @ApiResponse(code = 401,
                     message = "Você não possui autorização para utilizar este" +
                               " recurso.")
     })
+
     @GetMapping(value = "/aggregates", produces = "application/json")
-    public ResponseEntity<Page<ErrorAggregate>> search(
+    public ResponseEntity<Page<ErrorAggregate>> searchAggregates(
             @RequestParam(value = "environment", required = false) Environment environment,
             @RequestParam(value = "level", required = false) Level level,
             @RequestParam(value = "origin", required = false) String origin,
@@ -88,7 +88,7 @@ public class ErrorController {
                     message = "Erro registrado com sucesso."),
             @ApiResponse(code = 400,
                     message = "A requisição enviada possui parâmetros " +
-                              "inváidos."),
+                              "inválidos."),
             @ApiResponse(code = 401,
                     message = "Você não possui autorização para utilizar este" +
                               " recurso.")
@@ -99,24 +99,28 @@ public class ErrorController {
                                     HttpStatus.CREATED);
     }
 
-    @ApiOperation(value = "Arquiva ou desarquiva um erro",
-            response = ErrorArchivingStatusDTO.class)
+    @ApiOperation(value = "Arquiva um erro")
     @ApiResponses(value = {
-            @ApiResponse(code = 200,
-                    message = "Erro arquivo ou desarquivado com sucesso."),
+            @ApiResponse(code = 204,
+                    message = "Erro arquivado sucesso."),
             @ApiResponse(code = 400,
                     message = "A requisição enviada possui parâmetros " +
-                              "inváidos."),
+                              "inválidos."),
             @ApiResponse(code = 401,
                     message = "Você não possui autorização para utilizar este" +
                               " recurso."),
-            @ApiResponse(code = 404, message = "Erro não encontrado.")
+            @ApiResponse(code = 404, message = "Erro não encontrado."),
+            @ApiResponse(code = 409, message = "Estado conflitante: O erro já" +
+                                               " se " +
+                                               "encontra " +
+                                               "arquivado.")
     })
     @PatchMapping(value = "/{id}/archived", produces = "application/json")
-    public ResponseEntity<ErrorArchivingStatusDTO> stash(
+    public ResponseEntity<Void> archive(
             @PathVariable("id") Long id) {
-        ErrorArchivingStatusDTO dto = errorService.stash(id);
-        return new ResponseEntity<>(dto, HttpStatus.OK);
+        errorService.archive(id);
+        return ResponseEntity.noContent()
+                             .build();
     }
 
     @ApiOperation(value = "Exclui (irreversivelmente) um erro.")
@@ -125,7 +129,7 @@ public class ErrorController {
                     message = "Erro excluído com sucesso."),
             @ApiResponse(code = 400,
                     message = "A requisição enviada possui parâmetros " +
-                              "inváidos."),
+                              "inválidos."),
             @ApiResponse(code = 401,
                     message = "Você não possui autorização para utilizar este" +
                               " recurso."),

@@ -31,7 +31,7 @@ import java.util.Date;
            "    COUNT(e.id) as events " +
            "FROM error e " +
            "WHERE " +
-           "    e.archived = false " +
+           "    e.archived_at IS NULL " +
            "GROUP BY " +
            "    e.environment, " +
            "    e.level, " +

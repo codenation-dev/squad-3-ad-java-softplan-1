@@ -31,7 +31,7 @@ public interface ErrorRepository extends JpaRepository<Error, Long> {
     @Transactional
     @Modifying
     @Query("UPDATE Error e " +
-           "SET e.lastArchivedDate = CURRENT_DATE " +
+           "SET e.archivedAt = CURRENT_DATE " +
            "WHERE " +
            "    e.environment =:environment " +
            "    AND e.level =:level " +
