@@ -142,7 +142,17 @@ public class ErrorController {
                              .build();
     }
 
-
+    @ApiOperation(value = "Arquiva um agregado de erros.")
+    @ApiResponses(value = {
+            @ApiResponse(code = 204,
+                    message = "Ordem de arquivamento executada."),
+            @ApiResponse(code = 400,
+                    message = "A requisição enviada possui parâmetros " +
+                              "inválidos."),
+            @ApiResponse(code = 401,
+                    message = "Você não possui autorização para utilizar este" +
+                              " recurso.")
+    })
     @PatchMapping(value = "/aggregates/archived", produces = "application/json")
     public ResponseEntity<Integer> archiveAggregate(
             @RequestParam(value = "environment", required = true) Environment environment,
@@ -155,6 +165,17 @@ public class ErrorController {
                              .build();
     }
 
+    @ApiOperation(value = "Exclui (irreversivelmente) um agregado de erros.")
+    @ApiResponses(value = {
+            @ApiResponse(code = 204,
+                    message = "Ordem de exclusão executada."),
+            @ApiResponse(code = 400,
+                    message = "A requisição enviada possui parâmetros " +
+                              "inválidos."),
+            @ApiResponse(code = 401,
+                    message = "Você não possui autorização para utilizar este" +
+                              " recurso.")
+    })
     @DeleteMapping(value = "/aggregates", produces = "application/json")
     public ResponseEntity<Void> deleteAggregate(
             @RequestParam(value = "environment", required = true) Environment environment,
