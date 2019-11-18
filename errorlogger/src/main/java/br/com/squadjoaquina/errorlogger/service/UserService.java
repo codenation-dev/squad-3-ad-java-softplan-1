@@ -47,8 +47,8 @@ public class UserService {
         }
     }
 
-    public void save(UserDTO userDTO) {
-        userRepository.save(UserMapper.toUser(userDTO));
+    public User save(UserDTO userDTO) {
+        return userRepository.save(UserMapper.toUser(userDTO));
     }
 
     public long count() {

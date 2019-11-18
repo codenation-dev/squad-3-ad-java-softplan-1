@@ -1,5 +1,6 @@
 package br.com.squadjoaquina.errorlogger.dto;
 
+import br.com.squadjoaquina.errorlogger.model.User;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -40,10 +41,20 @@ public class UserDTO implements UserDetails {
         return null;
     }
 
+    public UserDTO(User user){
+        email = user.getEmail();
+        password = user.getPassword();
+        login = user.getLogin();
+    }
+
     @Override
-    public
-    String getUsername() {
-        return login;
+    public String getUsername() {
+        return email;
+    }
+
+    @Override
+    public String getPassword(){
+        return password;
     }
 
     @Override
