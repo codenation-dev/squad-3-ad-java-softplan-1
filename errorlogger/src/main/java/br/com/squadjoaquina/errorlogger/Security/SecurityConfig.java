@@ -34,6 +34,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 "/user/**"
         };
 
+    private static final String[] PUBLIC_SWAGGER={
+             "/v2/api-docs",
+             "/swagger-resources",
+             "/swagger-resources/**",
+             "/configuration/ui",
+             "/configuration/security",
+             "/swagger-ui.html",
+             "/webjars/**"
+    };
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
@@ -47,6 +57,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.cors().and().csrf().disable();
         http.authorizeRequests()
                 .antMatchers(PUBLIC_MATCHERS).permitAll()
+                .antMatchers(PUBLIC_SWAGGER).permitAll()
                 .anyRequest().authenticated();
         http.addFilter(new JWTAuthenticationFilter(jwtUtil, authenticationManager()));
         http.addFilter(new JTWAuthorizationFilter(authenticationManager(), jwtUtil, userDetailsService));
