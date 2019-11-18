@@ -14,8 +14,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-@Api(tags = "Error Endpoint",
-        description = "Realiza operações com erros e agregados de erros.")
+@Api(tags = "Error Controller",
+        description = "Realiza operações com Erros e Agregados de Erros.")
 public interface ErrorController {
 
     @ApiOperation(value = "Arquiva um erro.")
