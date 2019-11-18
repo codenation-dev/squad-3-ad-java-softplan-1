@@ -18,14 +18,11 @@ public interface UserController {
             response = ErrorAggregate.class)
     @ApiResponses(value = {
             @ApiResponse(code = 201,
-                    message = "Criado."),
+                    message = ResponseMessages.CREATED_201),
             @ApiResponse(code = 400,
-                    message = "A requisição enviada possui parâmetros " +
-                              "inválidos."),
+                    message = ResponseMessages.BAD_REQUEST_400),
             @ApiResponse(code = 401,
-                    message =
-                            "Você não possui autorização para utilizar este " +
-                            "recurso."),
+                    message = ResponseMessages.UNAUTHORIZED_401),
     })
     @ResponseStatus(value = HttpStatus.CREATED)
     public ResponseEntity<?> save(UserDTO userDTO);

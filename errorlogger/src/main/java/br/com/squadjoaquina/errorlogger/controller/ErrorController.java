@@ -21,29 +21,23 @@ public interface ErrorController {
     @ApiOperation(value = "Arquiva um erro.")
     @ApiResponses(value = {
             @ApiResponse(code = 200,
-                    message = "Sucesso."),
+                    message = ResponseMessages.OK_200),
             @ApiResponse(code = 400,
-                    message = "A requisição enviada possui parâmetros " +
-                              "inválidos."),
+                    message = ResponseMessages.BAD_REQUEST_400),
             @ApiResponse(code = 401,
-                    message =
-                            "Você não possui autorização para utilizar este " +
-                            "recurso."),
-            @ApiResponse(code = 404, message = "Não encontrado.")
+                    message = ResponseMessages.UNAUTHORIZED_401),
+            @ApiResponse(code = 404, message = ResponseMessages.NOT_FOUND_404)
     })
     public ResponseEntity<ErrorDTO> getById(Long id);
 
     @ApiOperation(value = "Arquiva um erro.")
     @ApiResponses(value = {
             @ApiResponse(code = 200,
-                    message = "Sucesso."),
+                    message = ResponseMessages.OK_200),
             @ApiResponse(code = 400,
-                    message = "A requisição enviada possui parâmetros " +
-                              "inválidos."),
+                    message = ResponseMessages.BAD_REQUEST_400),
             @ApiResponse(code = 401,
-                    message =
-                            "Você não possui autorização para utilizar este " +
-                            "recurso.")
+                    message = ResponseMessages.UNAUTHORIZED_401)
     })
     public ResponseEntity<Page<ErrorAggregate>> searchAggregates(
             Environment environment,
@@ -57,14 +51,11 @@ public interface ErrorController {
             response = ErrorAggregate.class)
     @ApiResponses(value = {
             @ApiResponse(code = 201,
-                    message = "Criado."),
+                    message = ResponseMessages.CREATED_201),
             @ApiResponse(code = 400,
-                    message = "A requisição enviada possui parâmetros " +
-                              "inválidos."),
+                    message = ResponseMessages.BAD_REQUEST_400),
             @ApiResponse(code = 401,
-                    message =
-                            "Você não possui autorização para utilizar este " +
-                            "recurso."),
+                    message = ResponseMessages.UNAUTHORIZED_401),
     })
     @ResponseStatus(value = HttpStatus.CREATED)
     public ResponseEntity<ErrorDTO> save(ErrorDTO error);
@@ -72,23 +63,13 @@ public interface ErrorController {
     @ApiOperation(value = "Arquiva um erro.")
     @ApiResponses(value = {
             @ApiResponse(code = 204,
-                    message =
-                            "Sucesso. Não há conteúdo adicional a ser enviado" +
-                            " " +
-                            "no corpo da resposta."),
+                    message = ResponseMessages.NO_CONTENT_204),
             @ApiResponse(code = 400,
-                    message = "A requisição enviada possui parâmetros " +
-                              "inválidos."),
+                    message = ResponseMessages.BAD_REQUEST_400),
             @ApiResponse(code = 401,
-                    message =
-                            "Você não possui autorização para utilizar este " +
-                            "recurso."),
-            @ApiResponse(code = 404, message = "Não encontrado."),
-            @ApiResponse(code = 409, message =
-                    "Conflito. A requisição pressupõe " +
-                    "que o recurso está em um estado " +
-                    "diferente do estado verificado no" +
-                    " servidor.")
+                    message = ResponseMessages.UNAUTHORIZED_401),
+            @ApiResponse(code = 404, message = ResponseMessages.NOT_FOUND_404),
+            @ApiResponse(code = 409, message = ResponseMessages.CONFLICT_409)
     })
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public ResponseEntity<Void> archive(Long id);
@@ -96,18 +77,12 @@ public interface ErrorController {
     @ApiOperation(value = "Exclui (irreversivelmente) um erro.")
     @ApiResponses(value = {
             @ApiResponse(code = 204,
-                    message =
-                            "Sucesso. Não há conteúdo adicional a ser enviado" +
-                            " " +
-                            "no corpo da resposta."),
+                    message = ResponseMessages.NO_CONTENT_204),
             @ApiResponse(code = 400,
-                    message = "A requisição enviada possui parâmetros " +
-                              "inválidos."),
+                    message = ResponseMessages.BAD_REQUEST_400),
             @ApiResponse(code = 401,
-                    message =
-                            "Você não possui autorização para utilizar este " +
-                            "recurso."),
-            @ApiResponse(code = 404, message = "Não encontrado."),
+                    message = ResponseMessages.UNAUTHORIZED_401),
+            @ApiResponse(code = 404, message = ResponseMessages.NOT_FOUND_404),
     })
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public ResponseEntity<Void> delete(Long id);
@@ -115,17 +90,11 @@ public interface ErrorController {
     @ApiOperation(value = "Arquiva um agregado de erros.")
     @ApiResponses(value = {
             @ApiResponse(code = 204,
-                    message =
-                            "Sucesso. Não há conteúdo adicional a ser enviado" +
-                            " " +
-                            "no corpo da resposta."),
+                    message = ResponseMessages.NO_CONTENT_204),
             @ApiResponse(code = 400,
-                    message = "A requisição enviada possui parâmetros " +
-                              "inválidos."),
+                    message = ResponseMessages.BAD_REQUEST_400),
             @ApiResponse(code = 401,
-                    message =
-                            "Você não possui autorização para utilizar este " +
-                            "recurso.")
+                    message = ResponseMessages.UNAUTHORIZED_401)
     })
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public ResponseEntity<Integer> archiveAggregate(
@@ -138,17 +107,11 @@ public interface ErrorController {
     @ApiOperation(value = "Exclui (irreversivelmente) um agregado de erros.")
     @ApiResponses(value = {
             @ApiResponse(code = 204,
-                    message =
-                            "Sucesso. Não há conteúdo adicional a ser enviado" +
-                            " " +
-                            "no corpo da resposta."),
+                    message = ResponseMessages.NO_CONTENT_204),
             @ApiResponse(code = 400,
-                    message = "A requisição enviada possui parâmetros " +
-                              "inválidos."),
+                    message = ResponseMessages.BAD_REQUEST_400),
             @ApiResponse(code = 401,
-                    message =
-                            "Você não possui autorização para utilizar este " +
-                            "recurso.")
+                    message = ResponseMessages.UNAUTHORIZED_401)
     })
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public ResponseEntity<Void> deleteAggregate(
