@@ -12,6 +12,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -36,10 +37,9 @@ public class User {
 
 
     @NotNull
-    @JsonIgnore
     private String password;
 
     @CreatedDate
-    private Timestamp createdAt;
+    private Date createdAt;
 
 }
