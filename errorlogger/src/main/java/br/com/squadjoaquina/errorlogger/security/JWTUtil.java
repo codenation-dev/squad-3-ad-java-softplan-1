@@ -1,4 +1,4 @@
-package br.com.squadjoaquina.errorlogger.Security;
+package br.com.squadjoaquina.errorlogger.security;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

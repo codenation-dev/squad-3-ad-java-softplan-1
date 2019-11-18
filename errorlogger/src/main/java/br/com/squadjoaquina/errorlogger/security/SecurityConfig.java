@@ -1,4 +1,4 @@
-package br.com.squadjoaquina.errorlogger.Security;
+package br.com.squadjoaquina.errorlogger.security;
 
 
 import org.springframework.beans.factory.annotation.Autowired;

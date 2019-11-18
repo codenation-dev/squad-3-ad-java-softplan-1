@@ -1,4 +1,4 @@
-package br.com.squadjoaquina.errorlogger.Security;
+package br.com.squadjoaquina.errorlogger.security;
 
 import br.com.squadjoaquina.errorlogger.dto.CredentialsDTO;
 import br.com.squadjoaquina.errorlogger.dto.UserDTO;
