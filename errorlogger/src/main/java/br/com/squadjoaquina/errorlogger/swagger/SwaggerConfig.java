@@ -23,8 +23,8 @@ public class SwaggerConfig {
                         "br.com.squadjoaquina.errorlogger"))
                 .paths(PathSelectors.any())
                 .build()
-                .apiInfo(metaData())
-                .useDefaultResponseMessages(false);
+                .useDefaultResponseMessages(false)
+                .apiInfo(metaData());
     }
 
     private ApiInfo metaData() {
