@@ -20,10 +20,6 @@ public class UserController {
     @Autowired
      private BCryptPasswordEncoder pe;
 
-    @GetMapping(value = "/teste")
-    public String findAll(){
-        return "new ResponseEntity<>(userService.findById(1L), HttpStatus.OK )";
-    }
     @PostMapping(produces = "application/json")
     public ResponseEntity<?> save(@Valid @RequestBody User user){
         user.setPassword(pe.encode(user.getPassword()));
