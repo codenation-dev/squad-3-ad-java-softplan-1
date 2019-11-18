@@ -11,5 +11,5 @@ public class ErrorloggerApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(ErrorloggerApplication.class, args);
 	}
-
+	//Comentario mais maneiro
 }
