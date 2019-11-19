@@ -6,6 +6,7 @@ import br.com.squadjoaquina.errorlogger.model.User;
 import br.com.squadjoaquina.errorlogger.repository.UserRepository;
 import br.com.squadjoaquina.errorlogger.service.exception.ErrorNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -54,5 +55,14 @@ public class UserService {
 
     public long count() {
         return userRepository.count();
+    }
+
+    public static UserDTO authenticated() {
+        try {
+            return (UserDTO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        }
+        catch (Exception e) {
+            return null;
+        }
     }
 }
