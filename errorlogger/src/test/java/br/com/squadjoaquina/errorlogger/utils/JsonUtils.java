@@ -3,7 +3,9 @@ package br.com.squadjoaquina.errorlogger.utils;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import java.time.LocalDateTime;
 
 public class JsonUtils {
 
@@ -20,7 +22,11 @@ public class JsonUtils {
     }
 
     public static <T> T toObject(String json, Class<T> c) {
-        return new Gson().fromJson(json, c);
+        return new GsonBuilder().registerTypeAdapter(LocalDateTime.class,
+                                                     new DateConverter())
+                                .create()
+                                .fromJson(json, c);
+
     }
 
 }

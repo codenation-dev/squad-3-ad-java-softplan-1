@@ -1,6 +1,7 @@
 package br.com.squadjoaquina.errorlogger.integration;
 
 import br.com.squadjoaquina.errorlogger.dto.UserDTO;
+import br.com.squadjoaquina.errorlogger.model.User;
 import br.com.squadjoaquina.errorlogger.utils.JsonUtils;
 import lombok.NoArgsConstructor;
 import org.junit.Assert;
@@ -13,7 +14,6 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
 @NoArgsConstructor
-//@Sql({"/resources/pre-sql.sql" })
 public class SaveUserEndpointTest extends EndpointTest {
 
     @Before
@@ -25,31 +25,51 @@ public class SaveUserEndpointTest extends EndpointTest {
     @Transactional
     public void whenRequestIsCorrect() throws Exception {
 
-        UserDTO userDTO = new UserDTO();
-        userDTO.setEmail("a@a.com");
-        userDTO.setLogin("a@a.com");
-        userDTO.setPassword("a");
+        User user = new User();
+        user.setEmail("a@a.com");
+        user.setLogin("a@a.com");
+        user.setPassword("a");
 
         MockHttpServletRequestBuilder request =
                 MockMvcRequestBuilders.post("/user", new Object[0])
                                       .accept("application/json")
-                                      .contentType(MediaType.APPLICATION_JSON_VALUE)
+                                      .contentType(
+                                              MediaType.APPLICATION_JSON_VALUE)
                                       .content(JsonUtils.toJsonIgnoreNullFields(
-                                              userDTO));
+                                              user));
 
-        MockHttpServletResponse receivedResponse =
-                this.mockMvc.perform(request)
-                            .andReturn()
-                            .getResponse();
+        MockHttpServletResponse receivedResponse = performRequest(request);
 
-        System.out.println(receivedResponse.getHeaderNames());
         String content = receivedResponse.getContentAsString();
-        Assert.assertEquals(200, receivedResponse.getStatus());
+        Assert.assertEquals(201, receivedResponse.getStatus());
 
         UserDTO receivedDTO = JsonUtils.toObject(content, UserDTO.class);
 
-        Assert.assertEquals(userDTO.getEmail(), receivedDTO.getEmail());
-        Assert.assertEquals(userDTO.getLogin(), receivedDTO.getLogin());
+        Assert.assertEquals(user.getEmail(), receivedDTO.getEmail());
+        Assert.assertEquals(user.getLogin(), receivedDTO.getLogin());
         Assert.assertNull(receivedDTO.getPassword());
+        Assert.assertNotNull(receivedDTO.getCreatedAt());
+    }
+
+    @Test
+    @Transactional
+    public void whenRequestIsIncorrect() throws Exception {
+
+        User user = new User();
+        user.setEmail("a@a.com");
+        user.setLogin("a@a.com");
+
+        MockHttpServletRequestBuilder request =
+                MockMvcRequestBuilders.post("/user", new Object[0])
+                                      .accept("application/json")
+                                      .contentType(
+                                              MediaType.APPLICATION_JSON_VALUE)
+                                      .content(JsonUtils.toJsonIgnoreNullFields(
+                                              user));
+
+        MockHttpServletResponse receivedResponse = performRequest(request);
+
+        String content = receivedResponse.getContentAsString();
+        Assert.assertEquals(400, receivedResponse.getStatus());
     }
 }
