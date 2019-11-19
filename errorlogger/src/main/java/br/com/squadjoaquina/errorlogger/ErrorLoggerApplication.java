@@ -6,10 +6,10 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 @SpringBootApplication
 @EnableJpaAuditing
-public class ErrorloggerApplication {
+public class ErrorLoggerApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ErrorloggerApplication.class, args);
+		SpringApplication.run(ErrorLoggerApplication.class, args);
 	}
 	//Comentario mais maneiro
 }

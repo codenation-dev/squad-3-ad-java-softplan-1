@@ -1,5 +1,6 @@
-package br.com.squadjoaquina.errorlogger.controller;
+package br.com.squadjoaquina.errorlogger.controller.impl;
 
+import br.com.squadjoaquina.errorlogger.controller.UserController;
 import br.com.squadjoaquina.errorlogger.dto.UserDTO;
 import br.com.squadjoaquina.errorlogger.model.User;
 import br.com.squadjoaquina.errorlogger.service.UserService;
@@ -18,7 +19,7 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("user")
 @AllArgsConstructor
-public class UserControllerImp implements UserController {
+public class UserControllerImpl implements UserController {
 
     private final UserService userService;
     @Autowired
