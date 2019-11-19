@@ -12,6 +12,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Getter
@@ -40,6 +41,6 @@ public class User {
     private String password;
 
     @CreatedDate
-    private Date createdAt;
+    private LocalDateTime createdAt;
 
 }

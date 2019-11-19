@@ -9,6 +9,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -43,9 +44,9 @@ public class Error {
     @Enumerated(EnumType.STRING)
     private Environment environment;
 
-    private Date archivedAt;
+    private LocalDateTime archivedAt;
 
     @Column(updatable = false)
     @CreatedDate
-    private Date createdAt;
+    private LocalDateTime createdAt;
 }

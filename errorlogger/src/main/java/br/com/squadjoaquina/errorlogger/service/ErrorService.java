@@ -13,6 +13,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
@@ -50,7 +51,7 @@ public class ErrorService {
     public void archive(Long id) {
         ErrorDTO errorDTO = getById(id);
         if (errorDTO.getArchivedAt() == null) {
-            errorDTO.setArchivedAt(new Date(System.currentTimeMillis()));
+            errorDTO.setArchivedAt(LocalDateTime.now());
             errorRepository.save(ErrorMapper.toError(errorDTO));
         } else {
             throw new ErrorAlreadyArchivedException();
