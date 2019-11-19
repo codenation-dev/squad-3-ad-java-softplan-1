@@ -4,3 +4,4 @@ Premissas:
 2: Cada erro tem apenas um level.
 3: Arquivar pode ser acessado por meio de uma consulta específica.
 3: Apagar erros apaga mesmo na base.
+4: O cadastro de Usuário só pode ser acessado por usuários logados (Criação de um User admin para cadastrar novos users)
