@@ -2,6 +2,7 @@ package br.com.squadjoaquina.errorlogger.dto;
 
 import br.com.squadjoaquina.errorlogger.model.Environment;
 import br.com.squadjoaquina.errorlogger.model.Level;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -11,6 +12,7 @@ import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @ApiModel("Error")
@@ -54,9 +56,11 @@ public class ErrorDTO {
 
     @ApiModelProperty(notes = "Data de arquivação do erro.")
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    private Date archivedAt;
+    @JsonFormat(pattern = "dd-MM-yyyy H:mm:ss")
+    private LocalDateTime archivedAt;
 
     @ApiModelProperty(notes = "Data de criação do erro. Imutável.")
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    private Date createdAt;
+    @JsonFormat(pattern = "dd-MM-yyyy H:mm:ss")
+    private LocalDateTime createdAt;
 }

@@ -1,5 +1,6 @@
 package br.com.squadjoaquina.errorlogger.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
@@ -11,6 +12,7 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @ApiModel(description = "Agregado de erros do mesmo tipo. \n" +
@@ -60,7 +62,8 @@ public class ErrorAggregate {
     private Long lastErrorId;
 
     @ApiModelProperty(notes = "Data de ocorrência do último erro deste tipo")
-    private Date lastErrorDate;
+    @JsonFormat(pattern = "dd-MM-yyyy H:mm:ss")
+    private LocalDateTime lastErrorDate;
 
     @ApiModelProperty(notes = "Número de erros deste tipo registrados.")
     private Long events;

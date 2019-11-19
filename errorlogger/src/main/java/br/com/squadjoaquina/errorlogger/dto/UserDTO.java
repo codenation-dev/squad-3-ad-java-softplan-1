@@ -1,6 +1,7 @@
 package br.com.squadjoaquina.errorlogger.dto;
 
 import br.com.squadjoaquina.errorlogger.model.User;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModel;
@@ -8,14 +9,13 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.data.annotation.CreatedDate;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 import java.util.Collection;
-import java.util.Date;
 
 @ApiModel("User")
 @Getter
@@ -43,8 +43,8 @@ public class UserDTO implements UserDetails {
 
     @ApiModelProperty(notes = "Data de criação do usuário")
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    @CreatedDate
-    private Date createdAt;
+    @JsonFormat(pattern = "dd-MM-yyyy H:mm:ss")
+    private LocalDateTime createdAt;
 
     public UserDTO(User user) {
         email = user.getEmail();
@@ -81,7 +81,6 @@ public class UserDTO implements UserDetails {
     }
 
     @JsonIgnore
-
     @Override
     public boolean isCredentialsNonExpired() {
         return true;
