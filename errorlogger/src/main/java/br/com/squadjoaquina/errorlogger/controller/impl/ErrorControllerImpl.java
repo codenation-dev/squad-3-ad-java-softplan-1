@@ -1,5 +1,6 @@
-package br.com.squadjoaquina.errorlogger.controller;
+package br.com.squadjoaquina.errorlogger.controller.impl;
 
+import br.com.squadjoaquina.errorlogger.controller.ErrorController;
 import br.com.squadjoaquina.errorlogger.dto.ErrorDTO;
 import br.com.squadjoaquina.errorlogger.model.Environment;
 import br.com.squadjoaquina.errorlogger.model.ErrorAggregate;
@@ -17,14 +18,14 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("v1/error")
-public class ErrorControllerImp implements ErrorController {
+public class ErrorControllerImpl implements ErrorController {
 
     public final ErrorService errorService;
     public final ErrorAggregateService errorAggregateService;
 
     @Autowired
-    public ErrorControllerImp(ErrorService errorService,
-                              ErrorAggregateService aggregateErrorsService) {
+    public ErrorControllerImpl(ErrorService errorService,
+                               ErrorAggregateService aggregateErrorsService) {
         this.errorService = errorService;
         this.errorAggregateService = aggregateErrorsService;
     }
