@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
         description = "Realiza operações com Erros e Agregados de Erros.")
 public interface ErrorController {
 
-    @ApiOperation(value = "Arquiva um erro.")
+    @ApiOperation(value = "Retorna um erro a partir do Id do mesmo.")
     @ApiResponses(value = {
             @ApiResponse(code = 200,
                     message = ResponseMessages.OK_200),
@@ -30,7 +30,8 @@ public interface ErrorController {
     })
     public ResponseEntity<ErrorDTO> getById(Long id);
 
-    @ApiOperation(value = "Arquiva um erro.")
+    @ApiOperation(value = "Retorna páginas de agregados de erros. Permite " +
+                          "diversos tipos de filtragem.")
     @ApiResponses(value = {
             @ApiResponse(code = 200,
                     message = ResponseMessages.OK_200),
