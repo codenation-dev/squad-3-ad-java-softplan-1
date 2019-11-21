@@ -35,7 +35,7 @@ public class User {
 
 
     @NotNull
-    private String login;
+    private String name;
 
 
     @NotNull

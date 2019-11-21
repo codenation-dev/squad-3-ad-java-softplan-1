@@ -39,8 +39,8 @@ public class UserService {
         }
     }
 
-    public UserDTO findByLogin(String login) {
-        Optional<User> userOptional = userRepository.findByLogin(login);
+    public UserDTO findByName(String name) {
+        Optional<User> userOptional = userRepository.findByName(name);
         if (userOptional.isPresent()) {
             return UserMapper.toUserDTO(userOptional.get());
         } else {

@@ -32,9 +32,9 @@ public class UserDTO implements UserDetails {
     @NotNull
     private String email;
 
-    @ApiModelProperty(notes = "Login do usuário.", required = true)
+    @ApiModelProperty(notes = "Nome do usuário.", required = true)
     @NotNull
-    private String login;
+    private String name;
 
     @ApiModelProperty(notes = "Senha do usuário", required = true)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
@@ -49,7 +49,7 @@ public class UserDTO implements UserDetails {
     public UserDTO(User user) {
         email = user.getEmail();
         password = user.getPassword();
-        login = user.getLogin();
+        name = user.getName();
     }
 
     @JsonIgnore
