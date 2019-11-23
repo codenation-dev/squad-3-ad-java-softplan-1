@@ -27,7 +27,7 @@ public class SaveUserEndpointTest extends EndpointTest {
 
         User user = new User();
         user.setEmail("a@a.com");
-        user.setLogin("a@a.com");
+        user.setName("a@a.com");
         user.setPassword("a");
 
         MockHttpServletRequestBuilder request =
@@ -46,7 +46,7 @@ public class SaveUserEndpointTest extends EndpointTest {
         UserDTO receivedDTO = JsonUtils.toObject(content, UserDTO.class);
 
         Assert.assertEquals(user.getEmail(), receivedDTO.getEmail());
-        Assert.assertEquals(user.getLogin(), receivedDTO.getLogin());
+        Assert.assertEquals(user.getName(), receivedDTO.getName());
         Assert.assertNull(receivedDTO.getPassword());
         Assert.assertNotNull(receivedDTO.getCreatedAt());
     }
@@ -57,7 +57,7 @@ public class SaveUserEndpointTest extends EndpointTest {
 
         User user = new User();
         user.setEmail("a@a.com");
-        user.setLogin("a@a.com");
+        user.setName("a@a.com");
 
         MockHttpServletRequestBuilder request =
                 MockMvcRequestBuilders.post("/user", new Object[0])

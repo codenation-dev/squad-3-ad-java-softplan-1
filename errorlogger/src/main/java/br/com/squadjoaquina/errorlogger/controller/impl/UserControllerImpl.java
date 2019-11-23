@@ -26,6 +26,7 @@ public class UserControllerImpl implements UserController {
     private BCryptPasswordEncoder pe;
 
     @PostMapping(produces = "application/json")
+    @Override
     public ResponseEntity<?> save(@Valid @RequestBody UserDTO userDTO) {
         userDTO.setPassword(pe.encode(userDTO.getPassword()));
         return new ResponseEntity<>(userService.save(userDTO),
