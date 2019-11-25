@@ -17,7 +17,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = {ErrorLoggerApplication.class})
-@TestPropertySource(locations = "classpath:test.properties")
+@TestPropertySource(locations = "classpath:application.properties")
 @WebAppConfiguration
 @NoArgsConstructor
 @Sql({"classpath:test_data.sql"})
