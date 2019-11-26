@@ -3,7 +3,6 @@ package br.com.squadjoaquina.errorlogger.model;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -34,12 +33,8 @@ public class Error {
 
     private String description;
 
-//    @NotNull
-//    @CreatedBy
-//    private Long userID;
-
-    @CreatedBy
-    private User user;
+    @NotNull
+    private Long userID;
 
     @NotNull
     @Enumerated(EnumType.STRING)
@@ -49,7 +44,6 @@ public class Error {
     @Enumerated(EnumType.STRING)
     private Environment environment;
 
-    @CreatedDate
     private LocalDateTime archivedAt;
 
     @Column(updatable = false)

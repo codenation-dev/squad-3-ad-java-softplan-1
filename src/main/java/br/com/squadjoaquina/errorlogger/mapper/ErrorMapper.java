@@ -19,7 +19,7 @@ public class ErrorMapper {
         error.setLevel(errorDTO.getLevel());
         error.setOrigin(errorDTO.getOrigin());
         error.setTitle(errorDTO.getTitle());
-        error.setUser(errorDTO.getUser());
+        error.setUserID(errorDTO.getUserID());
         error.setArchivedAt(errorDTO.getArchivedAt());
         return error;
     }
@@ -34,7 +34,7 @@ public class ErrorMapper {
         errorDTO.setLevel(error.getLevel());
         errorDTO.setOrigin(error.getOrigin());
         errorDTO.setTitle(error.getTitle());
-        errorDTO.setUser(error.getUser());
+        errorDTO.setUserID(error.getUserID());
         errorDTO.setArchivedAt(error.getArchivedAt());
         return errorDTO;
     }

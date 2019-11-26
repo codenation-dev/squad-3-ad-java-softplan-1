@@ -2,7 +2,6 @@ package br.com.squadjoaquina.errorlogger.dto;
 
 import br.com.squadjoaquina.errorlogger.model.Environment;
 import br.com.squadjoaquina.errorlogger.model.Level;
-import br.com.squadjoaquina.errorlogger.model.User;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModel;
@@ -44,8 +43,7 @@ public class ErrorDTO {
     @ApiModelProperty(notes = "Id do User que registrou o erro.",
             required = true)
     @NotNull
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    private User user;
+    private Long userID;
 
     @ApiModelProperty(notes = "Level de severidade do erro", required = true)
     @NotNull
