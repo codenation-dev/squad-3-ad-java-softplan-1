@@ -36,15 +36,15 @@ public class GetErrorEndpointTest extends EndpointTest {
                 receivedResponse.getContentAsString(),
                 ErrorDTO.class);
 
-        Assert.assertEquals(java.util.Optional.of(1l),
+        Assert.assertEquals(java.util.Optional.of(1L),
                             java.util.Optional.of(errorDTO.getId()));
         Assert.assertNotNull(errorDTO.getArchivedAt());
         Assert.assertNotNull(errorDTO.getCreatedAt());
         Assert.assertEquals("NULL POINTER", errorDTO.getDescription());
         Assert.assertEquals("NULL POINTER", errorDTO.getTitle());
         Assert.assertEquals("127.0.0.1", errorDTO.getOrigin());
-        Assert.assertEquals(java.util.Optional.of(1l),
-                            java.util.Optional.of(errorDTO.getUserID()));
+        Assert.assertEquals(java.util.Optional.of(1L),
+                            java.util.Optional.of(errorDTO.getUser().getId()));
         Assert.assertEquals(Level.ERROR, errorDTO.getLevel());
         Assert.assertEquals(Environment.PRODUCTION, errorDTO.getEnvironment());
     }
