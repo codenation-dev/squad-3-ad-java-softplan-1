@@ -14,6 +14,7 @@ import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -37,6 +38,8 @@ public class User {
     @NotNull
     private String name;
 
+    @OneToMany(mappedBy = "user")
+    private List<Error> errors;
 
     @NotNull
     private String password;

@@ -36,6 +36,7 @@ public class Error {
 
     @NotNull
     @CreatedBy
+    @ManyToOne
     private User user;
 
     @NotNull
