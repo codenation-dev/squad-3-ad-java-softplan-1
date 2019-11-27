@@ -36,6 +36,8 @@ public class Error {
 
     @NotNull
     @CreatedBy
+    @ManyToOne
+    @JoinColumn(name = "user_id")
     private User user;
 
     @NotNull

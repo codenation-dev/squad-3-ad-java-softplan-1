@@ -1,7 +1,6 @@
 package br.com.squadjoaquina.errorlogger.dto;
 
 import br.com.squadjoaquina.errorlogger.model.User;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModel;
@@ -43,7 +42,6 @@ public class UserDTO implements UserDetails {
 
     @ApiModelProperty(notes = "Data de criação do usuário")
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    @JsonFormat(pattern = "dd-MM-yyyy H:mm:ss")
     private LocalDateTime createdAt;
 
     public UserDTO(User user) {
