@@ -7,6 +7,7 @@ import br.com.squadjoaquina.errorlogger.repository.UserRepository;
 import br.com.squadjoaquina.errorlogger.service.exception.ErrorNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -14,6 +15,9 @@ import java.util.Optional;
 @Service
 public class UserService {
     private final UserRepository userRepository;
+
+    @Autowired
+    private BCryptPasswordEncoder pe;
 
     @Autowired
     public UserService(UserRepository userRepository) {
@@ -49,6 +53,7 @@ public class UserService {
     }
 
     public UserDTO save(UserDTO userDTO) {
+        userDTO.setPassword(pe.encode(userDTO.getPassword()));
         User user = userRepository.save(UserMapper.toUser(userDTO));
         return UserMapper.toUserDTO(user);
     }
