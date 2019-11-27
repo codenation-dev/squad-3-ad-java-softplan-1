@@ -11,7 +11,6 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Entity
 @Setter
@@ -33,10 +32,10 @@ public class Error {
     private String title;
 
     private String description;
-
-    @NotNull
-    @CreatedBy
+    
     @ManyToOne
+    @JoinColumn(name = "user_id")
+    @CreatedBy
     private User user;
 
     @NotNull

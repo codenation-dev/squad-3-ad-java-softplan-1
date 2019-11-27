@@ -10,7 +10,7 @@ public class DateConverter implements JsonSerializer<LocalDateTime>,
         JsonDeserializer<LocalDateTime> {
 
     private static DateTimeFormatter dateTimeFormatter =
-            DateTimeFormatter.ofPattern("dd-MM-yyyy H:mm:ss");
+            DateTimeFormatter.ISO_DATE_TIME;
 
     public JsonElement serialize(LocalDateTime localDateTime, Type type,
                                  JsonSerializationContext jsonSerializationContext) {
