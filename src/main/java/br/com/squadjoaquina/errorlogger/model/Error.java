@@ -32,9 +32,9 @@ public class Error {
     private String title;
 
     private String description;
-    
+
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", updatable = false)
     @CreatedBy
     private User user;
 

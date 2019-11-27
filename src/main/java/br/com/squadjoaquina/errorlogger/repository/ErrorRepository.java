@@ -13,6 +13,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 public interface ErrorRepository extends JpaRepository<Error, Long> {
+
+
     @Transactional
     @Modifying
     @Query("DELETE " +
@@ -42,4 +44,12 @@ public interface ErrorRepository extends JpaRepository<Error, Long> {
             @Param("level") Level level,
             @Param("origin") String origin,
             @Param("title") String title);
+
+    @Transactional
+    @Modifying
+    @Query("UPDATE Error e " +
+           "SET e.archivedAt = CURRENT_DATE " +
+           "WHERE " +
+           "    e.id = :id")
+    void archive(@Param("id") Long id);
 }
