@@ -14,6 +14,11 @@ em suas aplicações, a equipe optou por este tipo de autenticação.
 
 #### Instalação:
 
+##### Requisitos:
+ * Java JDK
+ * Maven
+
+
 ##### Para instalar o projeto é necessária a realização dos seguintes passos:
 ###### 1. Abra o terminal e digite na pasta raiz do projeto:
 ```
@@ -27,11 +32,26 @@ java [nome do arquivo gerado]
 
 #### Deploy do Projeto:
 
-O Deploy do projeto foi realizado no site [Heroku](http://www.heroku.com)
+##### Requisitos:
+ * Docker
 
-A API se encontra disponível em: [ErrorLogger](https://errorlogcodenation.herokuapp.com/)
+##### Para fazer o deploy pelo docker, realize os seguintes procedimentos:
 
-O frontend se encontra disponível em: [frontend]()
+###### 1. Após a instalação, crie um arquivo '.env' que vai conter as variavéis de ambiente para sua aplicação
+
+<img src="https://media.giphy.com/media/SVr2ArSu78CbCkAjGA/giphy.gif" />
+
+###### 2. e então abra seu terminal na pasta raiz do projeto e execute: 
+
+```
+docker-compose up
+```
+
+<img src="https://media.giphy.com/media/eIsatfWXbRGw9UV2rl/giphy.gif" />
+
+###### Pronto, sua aplicação já está funcionado. 
+
+O frontend se encontra disponível em: [Error logger - React](https://github.com/FelipeCooper/squad-3-ad-java-softplan-1-react)
 
 #### Documentação:
 
