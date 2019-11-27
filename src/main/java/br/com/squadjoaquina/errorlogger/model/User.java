@@ -27,6 +27,7 @@ public class User {
 
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
+    @Column(name = "user_id")
     private Long id;
 
     @Email
@@ -37,9 +38,6 @@ public class User {
 
     @NotNull
     private String name;
-
-    @OneToMany(mappedBy = "user")
-    private List<Error> errors;
 
     @NotNull
     private String password;
