@@ -55,13 +55,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        http.headers().frameOptions().disable();
+        // Permite acesso ao console do h2 no browser
+        if(Arrays.asList(env.getActiveProfiles()).contains("test")){
+            http.headers().frameOptions().disable();
+        }
 
         http.cors().and().csrf().disable();
         http.authorizeRequests()
-                .antMatchers(PUBLIC_MATCHERS).permitAll()
-                .antMatchers(PUBLIC_SWAGGER).permitAll()
-                .anyRequest().authenticated();
+            .antMatchers(PUBLIC_MATCHERS).permitAll()
+            .antMatchers(PUBLIC_SWAGGER).permitAll()
+            .anyRequest().authenticated();
         http.addFilter(new JWTAuthenticationFilter(jwtUtil, authenticationManager()));
         http.addFilter(new JTWAuthorizationFilter(authenticationManager(), jwtUtil, userDetailsService));
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
