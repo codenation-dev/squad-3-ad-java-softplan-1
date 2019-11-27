@@ -41,9 +41,9 @@ public class ErrorDTO {
 
     @ApiModelProperty(notes = "Id do User que registrou o erro.",
             required = true)
-    @NotNull
+
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    private User user;
+    private UserDTO user;
 
     @ApiModelProperty(notes = "Level de severidade do erro", required = true)
     @NotNull

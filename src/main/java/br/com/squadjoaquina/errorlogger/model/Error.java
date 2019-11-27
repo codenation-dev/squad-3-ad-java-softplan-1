@@ -32,10 +32,10 @@ public class Error {
     private String title;
 
     private String description;
-
-    @CreatedBy
+    
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @CreatedBy
     private User user;
 
     @NotNull
