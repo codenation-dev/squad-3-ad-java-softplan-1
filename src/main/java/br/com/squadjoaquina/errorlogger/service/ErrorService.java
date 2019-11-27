@@ -12,8 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
-import java.sql.Date;
-import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
@@ -51,17 +49,16 @@ public class ErrorService {
     public void archive(Long id) {
         ErrorDTO errorDTO = getById(id);
         if (errorDTO.getArchivedAt() == null) {
-            errorDTO.setArchivedAt(LocalDateTime.now());
-            errorRepository.save(ErrorMapper.toError(errorDTO));
+            errorRepository.archive(id);
         } else {
             throw new ErrorAlreadyArchivedException();
         }
     }
 
     public void archiveAggregate(Environment environment,
-                                Level level,
-                                String origin,
-                                String title) {
+                                 Level level,
+                                 String origin,
+                                 String title) {
         errorRepository.archiveAggregate(
                 environment, level, origin, title);
 

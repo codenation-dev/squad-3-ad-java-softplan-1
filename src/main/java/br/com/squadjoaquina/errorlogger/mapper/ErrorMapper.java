@@ -1,6 +1,7 @@
 package br.com.squadjoaquina.errorlogger.mapper;
 
 import br.com.squadjoaquina.errorlogger.dto.ErrorDTO;
+import br.com.squadjoaquina.errorlogger.dto.UserDTO;
 import br.com.squadjoaquina.errorlogger.model.Error;
 
 public class ErrorMapper {
@@ -19,8 +20,13 @@ public class ErrorMapper {
         error.setLevel(errorDTO.getLevel());
         error.setOrigin(errorDTO.getOrigin());
         error.setTitle(errorDTO.getTitle());
-        error.setUser(UserMapper.toUser(errorDTO.getUser()));
         error.setArchivedAt(errorDTO.getArchivedAt());
+
+        UserDTO userDTO = errorDTO.getUser();
+        if (userDTO != null) {
+            error.setUser(UserMapper.toUser(userDTO));
+        }
+
         return error;
     }
 
