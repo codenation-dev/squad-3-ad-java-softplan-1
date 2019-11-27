@@ -1,0 +1,36 @@
+version: '3'
+services:
+  db:
+    image: postgres
+    ports:
+      - "5432:5432"
+    env_file: .env   #environment variables
+    networks:
+      - postgres-compose-network
+
+  app:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    depends_on:
+      - db
+    env_file: .env     #environment variables
+    ports:
+      - "8080:8080"
+    networks:
+      - postgres-compose-network
+  pgadmin-d:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "felipe"
+      PGADMIN_DEFAULT_PASSWORD: "123"
+    ports:
+      - "16543:80"
+    depends_on:
+      - db
+    networks:
+      - postgres-compose-network
+
+networks: 
+  postgres-compose-network:
+    driver: bridge
