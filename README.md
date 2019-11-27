@@ -37,17 +37,25 @@ java [nome do arquivo gerado]
 
 ##### Para fazer o deploy pelo docker, realize os seguintes procedimentos:
 
-###### 1. Após a instalação, crie um arquivo '.env' que vai conter as variavéis de ambiente para sua aplicação
+###### 1. Após a instalação, abra o terminal na pasta raiz do projeto e execute:
 
-<img src="https://media.giphy.com/media/SVr2ArSu78CbCkAjGA/giphy.gif" />
+```
+docker build ./ -t errorlogger
+```
 
-###### 2. e então abra seu terminal na pasta raiz do projeto e execute: 
+<img src="https://media.giphy.com/media/gKfFBRf8gObClkx1dC/giphy.gif" />
+
+###### 2. Depois crie um arquivo '.env' que vai conter as variavéis de ambiente para sua aplicação
+
+<img src="https://media.giphy.com/media/W5lUsPqzpH7fZ7UCtq/giphy.gif" />
+
+###### 3. e então abra seu terminal na pasta raiz do projeto e execute: 
 
 ```
 docker-compose up
 ```
 
-<img src="https://media.giphy.com/media/eIsatfWXbRGw9UV2rl/giphy.gif" />
+<img src="https://media.giphy.com/media/SqCAndLD2IcHXB80Np/giphy.gif" />
 
 ###### Pronto, sua aplicação já está funcionado. 
 
