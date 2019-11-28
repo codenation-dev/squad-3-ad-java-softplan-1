@@ -1,5 +1,6 @@
-package br.com.squadjoaquina.errorlogger.controller;
+package br.com.squadjoaquina.errorlogger.controller.impl;
 
+import br.com.squadjoaquina.errorlogger.controller.AuthController;
 import br.com.squadjoaquina.errorlogger.dto.EmailDTO;
 import br.com.squadjoaquina.errorlogger.dto.UserDTO;
 import br.com.squadjoaquina.errorlogger.security.JWTUtil;
