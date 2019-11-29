@@ -37,19 +37,12 @@ java [nome do arquivo gerado]
 
 ##### Para fazer o deploy pelo docker, realize os seguintes procedimentos:
 
-###### 1. Após a instalação, abra o terminal na pasta raiz do projeto e execute:
 
-```
-docker build ./ -t errorlogger
-```
-
-<img src="https://media.giphy.com/media/gKfFBRf8gObClkx1dC/giphy.gif" />
-
-###### 2. Depois crie um arquivo '.env' que vai conter as variavéis de ambiente para sua aplicação
+###### 1. Edite o arquivo '.env' que vai conter as variavéis de ambiente para sua aplicação
 
 <img src="https://media.giphy.com/media/W5lUsPqzpH7fZ7UCtq/giphy.gif" />
 
-###### 3. e então abra seu terminal na pasta raiz do projeto e execute: 
+###### 2. e então abra seu terminal na pasta raiz do projeto e execute: 
 
 ```
 docker-compose up
@@ -58,6 +51,8 @@ docker-compose up
 <img src="https://media.giphy.com/media/SqCAndLD2IcHXB80Np/giphy.gif" />
 
 ###### Pronto, sua aplicação já está funcionado. 
+
+Aqui você encontra mais sobre as releases do [Error Logger](https://hub.docker.com/r/squadjoaquina/errorlogger/) no Docker.
 
 O frontend se encontra disponível em: [Error logger - React](https://github.com/FelipeCooper/squad-3-ad-java-softplan-1-react)
 
