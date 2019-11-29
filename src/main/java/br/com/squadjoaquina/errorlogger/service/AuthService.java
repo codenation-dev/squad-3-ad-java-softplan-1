@@ -2,6 +2,7 @@ package br.com.squadjoaquina.errorlogger.service;
 
 import br.com.squadjoaquina.errorlogger.model.User;
 import br.com.squadjoaquina.errorlogger.repository.UserRepository;
+import br.com.squadjoaquina.errorlogger.service.exception.UserEmailNotFoundException;
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -22,7 +23,7 @@ public class AuthService {
 
     public void sendNewPassword(String email){
         User user = userRepository.findByEmail(email)
-                                  .orElseThrow(() -> new ObjectNotFoundException(email ,"E-mail não encontrado"));
+                                  .orElseThrow(() -> new UserEmailNotFoundException(email));
         String newPasswd = newPassword();
         user.setPassword(pe.encode(newPasswd));
         userRepository.save(user);
