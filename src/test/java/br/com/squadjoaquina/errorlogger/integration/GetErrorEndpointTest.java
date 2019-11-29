@@ -36,7 +36,7 @@ public class GetErrorEndpointTest extends EndpointTest {
                 receivedResponse.getContentAsString(),
                 ErrorDTO.class);
 
-        Assert.assertEquals(java.util.Optional.of(1L),
+        Assert.assertEquals(java.util.Optional.of(2L),
                             java.util.Optional.of(errorDTO.getId()));
         Assert.assertNotNull(errorDTO.getArchivedAt());
         Assert.assertNotNull(errorDTO.getCreatedAt());
