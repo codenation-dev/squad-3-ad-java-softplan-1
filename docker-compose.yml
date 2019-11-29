@@ -9,9 +9,7 @@ services:
       - postgres-compose-network
 
   app:
-    build:
-      context: ./
-      dockerfile: Dockerfile
+    image: squadjoaquina/errorlogger
     depends_on:
       - db
     env_file: .env     #environment variables
