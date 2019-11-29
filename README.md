@@ -78,6 +78,7 @@ A documentação do projeto foi realizada através do Swagger, e se encontra dis
 - [ ] Criar auditoria em usuários
 - [ ] Criar perfis de usuários
 - [ ] Continuous deploy
+- [ ] Internacionalização das mensagens
 
 
 [HOME](#table-of-contents)
