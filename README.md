@@ -1,8 +1,19 @@
 # squad-3-ad-java-softplan-1
 
-### Error Logger
+## Table of Contents
 
-#### Visão Geral:
+- [Visão Geral](#visão-geral)
+- [Instalação](#instalação)
+- [Documentação](#documentação)
+- [Roadmap](#roadmap)
+
+
+
+
+
+## Error Logger
+
+## Visão Geral:
 
 Aplicação desenvolvida como requisito final da aceleração em Java promovida pela Codenation.
 O Objetivo da aplicação é basicamente a realização de uma API que seja capaz de armazenar erros em 
@@ -60,7 +71,15 @@ O frontend se encontra disponível em: [Error logger - React](https://github.com
 
 A documentação do projeto foi realizada através do Swagger, e se encontra disponível em [documentação](https://errorlogcodenation.herokuapp.com/swagger-ui.html)
 
+#### Roadmap:
+
+- [ ] Autenticação no cadastro de usuários
+- [ ] Permitir que o usuário altere sua senha de acesso
+- [ ] Criar auditoria em usuários
+- [ ] Criar perfis de usuários
+- [ ] Continuous deploy
+- [ ] Internacionalização das mensagens
 
 
-
+[HOME](#table-of-contents)
 
